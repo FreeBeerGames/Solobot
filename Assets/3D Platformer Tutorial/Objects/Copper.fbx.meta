@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: bdac925a905564588bd4811621dd5144
+labels:
+- character
+- robot
+- scifi
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: armClusterLeft
+    100002: armClusterRight
+    100004: Base
+    100006: Body
+    100008: bodyCluster
+    100010: //RootNode
+    100012: curve2
+    100014: Head
+    100016: Helmet
+    100018: ikHandle1
+    100020: ikHandle2
+    100022: ikHandle3
+    100024: LeftArmBend1
+    100026: LeftArmBend2
+    100028: LeftArmBend3
+    100030: LeftArmSpline
+    100032: LeftElbow
+    100034: LeftHand
+    100036: LeftShoulder
+    100038: LeftWrist
+    100040: RightArmBend1
+    100042: RightArmBend2
+    100044: RightArmBend3
+    100046: RightArmSpline
+    100048: RightElbow
+    100050: RightHand
+    100052: RightShoulder
+    100054: RightWrist
+    100056: Robot
+    100058: root
+    100060: Torso
+    100062: Waist1
+    100064: Waist2
+    400000: armClusterLeft
+    400002: armClusterRight
+    400004: Base
+    400006: Body
+    400008: bodyCluster
+    400010: //RootNode
+    400012: curve2
+    400014: Head
+    400016: Helmet
+    400018: ikHandle1
+    400020: ikHandle2
+    400022: ikHandle3
+    400024: LeftArmBend1
+    400026: LeftArmBend2
+    400028: LeftArmBend3
+    400030: LeftArmSpline
+    400032: LeftElbow
+    400034: LeftHand
+    400036: LeftShoulder
+    400038: LeftWrist
+    400040: RightArmBend1
+    400042: RightArmBend2
+    400044: RightArmBend3
+    400046: RightArmSpline
+    400048: RightElbow
+    400050: RightHand
+    400052: RightShoulder
+    400054: RightWrist
+    400056: Robot
+    400058: root
+    400060: Torso
+    400062: Waist1
+    400064: Waist2
+    2300000: Helmet
+    3300000: Helmet
+    4300000: Robot
+    4300002: Helmet
+    7400012: idle
+    7400014: attackrun
+    7400016: threaten
+    7400018: gothit
+    7400020: turnjump
+    11100000: //RootNode
+    13700000: Robot
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 0
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: idle
+      takeName: 
+      firstFrame: 0
+      lastFrame: 64
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: attackrun
+      takeName: 
+      firstFrame: 70
+      lastFrame: 86
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: threaten
+      takeName: 
+      firstFrame: 90
+      lastFrame: 106
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: gothit
+      takeName: 
+      firstFrame: 110
+      lastFrame: 126
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: turnjump
+      takeName: 
+      firstFrame: 90
+      lastFrame: 106
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 0
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

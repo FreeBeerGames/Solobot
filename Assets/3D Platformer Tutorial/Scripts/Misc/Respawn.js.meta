@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 4b95f67424aac408bb1e9153ffd022a5
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - SFXPlayerRespawn: {fileID: 8300000, guid: b7130049ed71e4c0c8f9267bad05f696, type: 3}
+  - SFXRespawnActivate: {fileID: 8300000, guid: f06362f3d1ac34aceaad8a86f005fb29,
+      type: 3}
+  - SFXRespawnActiveLoop: {fileID: 8300000, guid: b62263042018c437eb2aa3ffd70356ac,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

@@ -1,0 +1,73 @@
+fileFormatVersion: 2
+guid: eda7b4c4e04a04b5bba618811caa71d7
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Box
+    100002: Extrude
+    100004: Extrude.2_
+    100006: //RootNode
+    400000: Box
+    400002: Extrude
+    400004: Extrude.2_
+    400006: //RootNode
+    2300000: Box
+    2300002: Extrude
+    2300004: Extrude.2_
+    3300000: Box
+    3300002: Extrude
+    3300004: Extrude.2_
+    4300000: Box
+    4300002: Extrude
+    4300004: Extrude.2_
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 
