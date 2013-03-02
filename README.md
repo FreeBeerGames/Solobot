@@ -6,27 +6,18 @@
 * Joshua Kane
 * Dillon Daugherty
 
-***
 <br />
-### What is Solobot?
-
-***
+## What is Solobot?
 
 Solobot is a 3D sidescrolling platformer with shooter elements. The player controls the main character Bud Miller and attempts to break him out of a mad scientist's robot factory. Fighting through hoards of the scientist's robotic guards, the player must collect power-ups, steal abilities, and navigate dangerous obstacles in order to defeat powerful opponents. Combining game play elements of the popular classics such as Megaman and Kirby. Solobot will provide an engaging, enjoyable experience.
 
-***
 <br />
-### The Story
-
-***
+## The Story
 
 Bud Miller is kidnapped by the mad scientist Dr. Natty and bio-mechanically engineered with cybernetic upgrades to his body making him a half-robot cyborg. Bud Miller must escape the factory with the other half of his humanity before Dr. Natty replaces Bud's brain with a supercomputer AI that will turn him into a full fledged android to lead his army of robots on a quest of world domination. Bud can only escape by fighting his way out, taking advantage of the robotic abilities that were forced upon him, using weapons / robotic abilities (weapons systems programs?) obtained from defeated robots. In order to aid his escape Bud may decide to permanently enhance himself further with additional cybernetic upgrades, chipping away even further at his remaining humanity.
 
-***
 <br />
-### Game Description, Objectives
-
-***
+## Game Description, Objectives
 
 The game will feature 3D models and graphics, but all the action takes place in the 2D side scrolling plane. The player navigates from the start of the game through the level toward the final objective. Will feature game play elements such as a reflective armor/shield. The game should involve some thought in either the form of discovering how to escape or how to defeat a particular robot. We plan to incorporate and have a focus on tightly tuned controls in order to eliminate player frustrations. The game should put an emphasis on skill and timing, driving the player to perform better with a steep difficulty curve. Also, our game will feature robots, and robots are cool.
 
@@ -38,24 +29,21 @@ The game will feature 3D models and graphics, but all the action takes place in 
 * **Outcome** - Bud Miller either escapes the factory or is trapped within or defeated by Dr. Natty's robots. Bud Miller is turned into an android and serves the insane Dr. Natty for the rest of his artificial life.
 
 <br />
-### Development Tools
-***
+## Development Tools
 
 * **Platform:** Unity
 * **Audio:** Audacity
 * **Graphics:** Autodesk 3DS Max, Blender
 
 <br />
-### Development Levels
-***
+## Development Levels
 
 * **Alpha:** March 20th
 * **Beta:** April 10th
 * **Final:** April 20th
 
 <br/>
-### Deliverables
-***
+## Deliverables
 
 * **Part I** -- Game Proposal; Design Sketch 1; Design Sketch 2
 * **Part II** -- Design Specification; Interim Report
@@ -64,6 +52,5 @@ The game will feature 3D models and graphics, but all the action takes place in 
 * **Part V** -- Play Testing; Final Paper
 
 <br />
-### Demo Executables
-***
-* -- Coming soon
+## Demo Executables
+* Coming soon
