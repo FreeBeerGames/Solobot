@@ -34,7 +34,7 @@ The game will feature 3D models and graphics, but all the action takes place in 
 * **Game play objectives** - Escape form the robot factory before you are turned into an android by Dr. Natty (Start to Finish).
 * **Procedures/Rules** - The player has a certain amount of health and must avoid being hit by enemies in order to sustain positive health and stay alive. The player can eliminate enemies using his weapon, allowing enemies to hit and eliminate each other, or by reflecting enemy attacks using a shield.
 * **Resource Conflicts** - The player must find pick-ups for health and ammo, along with facing possible time constraints during parts of the game.
-* **Boundaries or Formal Elements - Platform which the player must navigate through as well as the factory in which the player is trapped in. The player must overcome the robots and escape the factory.
+* **Boundaries or Formal Elements** - Platform which the player must navigate through as well as the factory in which the player is trapped in. The player must overcome the robots and escape the factory.
 * **Outcome** - Bud Miller either escapes the factory or is trapped within or defeated by Dr. Natty's robots. Bud Miller is turned into an android and serves the insane Dr. Natty for the rest of his artificial life.
 
 <br />
