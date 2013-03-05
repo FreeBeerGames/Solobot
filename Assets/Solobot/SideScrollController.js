@@ -47,8 +47,6 @@ private var collisionFlags : CollisionFlags;
 private var jumping = false;
 private var jumpingReachedApex = false;
 
-// Are we moving backwards (This locks the camera to not do a 180 degree spin)
-private var movingBack = false;
 // Is the user pressing any keys?
 private var isMoving = false;
 // When did the user start walking (Used for going into trot after a while)
@@ -103,22 +101,13 @@ function ShowPlayer()
 function UpdateSmoothedMovementDirection ()
 {
 	var grounded = IsGrounded();
-
-	var v = Input.GetAxisRaw("Vertical");
 	var h = Input.GetAxisRaw("Horizontal");
-
-	// Are we moving backwards or looking backwards
-	if (v < -0.2)
-		movingBack = true;
-	else
-		movingBack = false;
 		
 	var wasMoving = isMoving;
-	isMoving = Mathf.Abs (h) > 0.1 || Mathf.Abs (v) > 0.1;
+	isMoving = Mathf.Abs (h) > 0.1;
 		
-	// Target direction relative to the camera
+	// Target direction is either positive or negative y axis in side scroller
 	var targetDirection = Vector3.zero;
-	
 	if (h < 0) targetDirection = Vector3(-1,0,0);
 	else if (h > 0) targetDirection = Vector3(1,0,0);
 	
@@ -416,9 +405,6 @@ function GetDirection () {
 	return moveDirection;
 }
 
-function IsMovingBackwards () {
-	return movingBack;
-}
 
 function GetLockCameraTimer () 
 {
@@ -453,4 +439,4 @@ function Reset ()
 }
 // Require a character controller to be attached to the same game object
 @script RequireComponent(CharacterController)
-@script AddComponentMenu("Third Person Player/Third Person Controller")
+@script AddComponentMenu("Side Scroll Player/Side Scroll Controller")
