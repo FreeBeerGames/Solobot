@@ -1,11 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\3D Platformer Tutorial\Scripts\Player\SideScrollCharacterAttack.js">
-    <Files>
-      <File FileName="Assets\Solobot\SideScrollController.js" Line="115" Column="15" />
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Player\SideScrollCharacterAttack.js" Line="27" Column="6" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
