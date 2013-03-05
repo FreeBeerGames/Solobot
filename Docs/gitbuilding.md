@@ -21,7 +21,7 @@ actually part of our open source repo.
 ## Git Workflow Overview
 
 Git is a source/version control system which can be downloaded from its
-[**official page][6]. The Unity IDE is *not* available for Linux, so we will
+[**official page**][6]. The Unity IDE is *not* available for Linux, so we will
 need to develop using Windows. So go ahead and download the latest stable
 Windows release of the Git utility. The Git utility is your client, you can
 run it from the Windows command line with the command `git`. There is a
