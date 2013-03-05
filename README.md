@@ -49,7 +49,7 @@ The game will feature 3D models and graphics, but all the action takes place in 
 * Coming soon
 
 ## Documentation
-* [**Build Instructions - Git Guide & Workflow**][4]
+* [**Build Instructions -** Git Guide & Workflow][4]
 
 [1]: Docs/Free%20Beer%20Project%20COMP%204970.odt
 [2]: Docs/design_sketch_1.jpg
