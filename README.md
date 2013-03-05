@@ -55,16 +55,3 @@ The game will feature 3D models and graphics, but all the action takes place in 
 [2]: Docs/design_sketch_1.jpg
 [3]: Docs/design_sketch_2.jpg
 [4]: Docs/gitbuilding.md
-
-<script>
-serverSide = true;
-
-if (typeof serverSide !== "undefined" ) {
-	$('a').each(function (i, e) { 
-		if(isMarkDownFile($(this).attr('href'))) {
-			$(this).attr('href', $(this).attr('href).substring(0, $(this.attr('href').length - 3)) + '.html');
-		}
-	});
-}
-	function isMarkDownFile(filename) { return filename.substring(filename.length - 3)[0] === '.' && filename.substring(filename.length - 3)[1] === 'm' && filename.substring(filename.length - 3)[2] === 'd'; }
-</script>
