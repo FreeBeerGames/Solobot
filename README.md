@@ -57,6 +57,8 @@ The game will feature 3D models and graphics, but all the action takes place in 
 [4]: Docs/gitbuilding.md
 
 <script>
+serverSide = true;
+
 if (typeof serverSide !== "undefined" ) {
 	$('a').each(function (i, e) { 
 		if(isMarkDownFile($(this).attr('href'))) {
