@@ -67,4 +67,4 @@ if (typeof serverSide !== "undefined" ) {
 	});
 }
 	function isMarkDownFile(filename) { return filename.substring(filename.length - 3)[0] === '.' && filename.substring(filename.length - 3)[1] === 'm' && filename.substring(filename.length - 3)[2] === 'd'; }
-<script>
+</script>
