@@ -104,19 +104,19 @@ You should now right click the repository in the Github client and click
 <strong>Open Shell Here</strong> and setup our upstream remote repository. You can
 do this by issuing the following command:</p>
 
-<pre><code># git add remote git://github.com/FreeBeerGames/Solobot.git upstream
+<pre><code>git add remote upstream git://github.com/FreeBeerGames/Solobot.git
 </code></pre>
 
 <p>You can then run the following command to view all the remote repositories
 associated with the local repo:</p>
 
-<pre><code># git remote
+<pre><code>git remote
 </code></pre>
 
 <p>The last command should give you an output of:</p>
 
-<pre><code># origin
-# upstream
+<pre><code>origin
+upstream
 </code></pre>
 
 <p>This indicates that you have two remote repositories associated with the
@@ -130,9 +130,9 @@ from the upstream repo.</p>
 <p>In order to commit changes that you've made locally to your remote fork of the
 project you should issue the following series of commands:</p>
 
-<pre><code># git add .
-# git commit -a -m "Commit message/what you changed goes here"
-# git push origin master
+<pre><code>git add .
+git commit -a -m "Commit message/what you changed goes here"
+git push origin master
 </code></pre>
 
 <p>At this point you will have uploaded your changes to your remote fork of the
@@ -147,8 +147,8 @@ repository. If this is the case, your will have to merge the changes first by
 pulling the new changes in the upstream remote, then pushing everything once
 again to your remote fork</p>
 
-<pre><code># git pull upstream master
-# git push origin master
+<pre><code>git pull upstream master
+git push origin master
 </code></pre>
 
 <p>You may then complete your pull request.</p>
