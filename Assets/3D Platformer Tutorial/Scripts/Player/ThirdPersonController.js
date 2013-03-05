@@ -1,4 +1,3 @@
-
 // The speed when walking
 var walkSpeed = 3.0;
 // after trotAfterSeconds of walking we trot with trotSpeed
@@ -102,7 +101,17 @@ function ShowPlayer()
 
 function UpdateSmoothedMovementDirection ()
 {
+	var cameraTransform = Camera.main.transform;
 	var grounded = IsGrounded();
+	
+	// Forward vector relative to the camera along the x-z plane	
+	var forward = cameraTransform.TransformDirection(Vector3.forward);
+	forward.y = 0;
+	forward = forward.normalized;
+
+	// Right vector relative to the camera
+	// Always orthogonal to the forward vector
+	var right = Vector3(forward.z, 0, -forward.x);
 
 	var v = Input.GetAxisRaw("Vertical");
 	var h = Input.GetAxisRaw("Horizontal");
@@ -112,15 +121,12 @@ function UpdateSmoothedMovementDirection ()
 		movingBack = true;
 	else
 		movingBack = false;
-		
+	
 	var wasMoving = isMoving;
 	isMoving = Mathf.Abs (h) > 0.1 || Mathf.Abs (v) > 0.1;
 		
 	// Target direction relative to the camera
-	var targetDirection = Vector3.zero;
-	
-	if (h < 0) targetDirection = Vector3(-1,0,0);
-	else if (h > 0) targetDirection = Vector3(1,0,0);
+	var targetDirection = h * right + v * forward;
 	
 	// Grounded controls
 	if (grounded)
@@ -135,7 +141,18 @@ function UpdateSmoothedMovementDirection ()
 		// moveDirection is always normalized, and we only update it if there is user input.
 		if (targetDirection != Vector3.zero)
 		{
-			moveDirection = targetDirection.normalized;
+			// If we are really slow, just snap to the target direction
+			if (moveSpeed < walkSpeed * 0.9 && grounded)
+			{
+				moveDirection = targetDirection.normalized;
+			}
+			// Otherwise smoothly turn towards it
+			else
+			{
+				moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);
+				
+				moveDirection = moveDirection.normalized;
+			}
 		}
 		
 		// Smooth the speed based on the current target direction
