@@ -42,6 +42,7 @@ function DidPunch ()
 			enemy.SendMessage("ApplyDamage", punchHitPoints);
 			// Play sound.
 			if (punchSound)
+				Debug.Log('Did it');
 				audio.PlayOneShot(punchSound);
 		}
 	}

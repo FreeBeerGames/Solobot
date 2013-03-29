@@ -61,6 +61,7 @@ private var wallJumpContactNormalHeight : float;
 
 // the height we jumped from (Used to determine for how long to apply extra jump power after jumping.)
 private var lastJumpStartHeight = 0.0;
+
 // When did we touch the wall the first time during this jump (Used for wall jumping)
 private var touchWallJumpTime = -1.0;
 
