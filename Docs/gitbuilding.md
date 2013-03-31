@@ -55,11 +55,22 @@ So in the context of our project what I would recommend doing is forking the
 repository on GitHub, (top right of the repo page). Then on your clone your
 own fork locally using the **Clone in Windows** button. At this point the
 Github Windows client should have popped up and downloaded the remote repo.
+
+Even if you do not want to use the GitHub for Windows GUI, I recommend that
+you download it anyway because it comes with Git Shell, which is a command
+line shell which allows you to use Linux commands and directory structure
+on Windows. Regardless of what you use, if you have git installed, after
+you have forked the main repo [**FreeBeerGames/Solobot**][3] you can run
+the following command in order to clone the repo to the current working
+directory.
+
+    git clone https://github.com/FreeBeerGames/Solobot.git
+
 You should now right click the repository in the Github client and click
 **Open Shell Here** and setup our upstream remote repository. You can
 do this by issuing the following command:
 
-    git add remote upstream git://github.com/FreeBeerGames/Solobot.git
+    git remote add upstream https://github.com/FreeBeerGames/Solobot.git
 	
 You can then run the following command to view all the remote repositories
 associated with the local repo:
@@ -74,7 +85,7 @@ The last command should give you an output of:
 This indicates that you have two remote repositories associated with the
 current local repository. The original repository you cloned from. That is
 your fork unique to your GitHub account. The other remote repository is the
-upstream repository located at **FreeBeerGames/Solobot**. If you run the
+upstream repository located at [**FreeBeerGames/Solobot**][3]. If you run the
 following command with the verbose flag you will see that you have both
 fetch and push rights for your origin repository, however you may only fetch
 from the upstream repo.
