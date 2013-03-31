@@ -1,16 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js">
-    <Files>
-      <File FileName="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js" Line="55" Column="86" />
-      <File FileName="Assets\Solobot\SideScrollController.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\SideScrollPlayerAnimation.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\SideScrollCharacterAttack.js" Line="20" Column="2" />
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyPoliceGuy.js" Line="1" Column="1" />
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="1" Column="1" />
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Misc\FuelCellGlowLookAt.js" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
