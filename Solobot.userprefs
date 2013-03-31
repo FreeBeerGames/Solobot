@@ -1,4 +1,5 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\FalloutDeath.js">
     <Files>
@@ -12,6 +13,10 @@
       <File FileName="Assets\Solobot\FalloutDeath.js" Line="7" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+=======
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench />
+>>>>>>> 7298dcf9e310e9106968a4009234d0b21a4838af
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
