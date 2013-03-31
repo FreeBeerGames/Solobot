@@ -2,9 +2,9 @@
 function OnTriggerEnter (other : Collider)
 {
 	// Player fall out!
-	if (other.GetComponent (ThirdPersonStatus))
+	if (other.GetComponent (PlayerStatus))
 	{
-		other.GetComponent (ThirdPersonStatus).FalloutDeath();
+		other.GetComponent (PlayerStatus).FalloutDeath();
 	}
 	// Kill all rigidibodies flying through this area
 	// (Props that fell off)

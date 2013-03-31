@@ -95,19 +95,21 @@ function Die ()
 	if(lives < 0)
 		Application.LoadLevel("GameOver");	
 	
-	// If we've reached here, the player still has lives remaining, so respawn.
-	respawnPosition = Respawn.currentRespawn.transform.position;
-	Camera.main.transform.position = respawnPosition - (transform.forward * 4) + Vector3.up;	// reset camera too
-	// Hide the player briefly to give the death sound time to finish...
-	SendMessage("HidePlayer");
 	
-	// Relocate the player. We need to do this or the camera will keep trying to focus on the (invisible) player where he's standing on top of the FalloutDeath box collider.
-	transform.position = respawnPosition + Vector3.up;
+	// Hide the player briefly to give the death sound time to finish...
+	// (NOTE: "HidePlayer" also disables the player controls.)
+	SendMessage("HidePlayer");
 
 	yield WaitForSeconds(1.6);	// give the sound time to complete. 
 	
-	// (NOTE: "HidePlayer" also disables the player controls.)
-
+	// If we've reached here, the player still has lives remaining, so respawn.
+	respawnPosition = Respawn.currentRespawn.transform.position;
+	
+	Camera.main.transform.position = respawnPosition - (transform.forward * 4) + Vector3.up;	// reset camera too
+	
+	// Relocate the player. We need to do this or the camera will keep trying to focus on the (invisible) player where he's standing on top of the FalloutDeath box collider.
+	transform.position = respawnPosition + Vector3.up;
+	
 	SendMessage("ShowPlayer");	// Show the player again, ready for...	
 	// ... the respawn point to play it's particle effect
 	Respawn.currentRespawn.FireEffect ();

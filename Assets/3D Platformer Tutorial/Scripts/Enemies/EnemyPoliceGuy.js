@@ -36,8 +36,6 @@ var levelStateMachine : LevelStatus;
 
 function Start ()
 {
-	levelStateMachine = GameObject.Find("/Level").GetComponent(LevelStatus);
-
 	if (!levelStateMachine)
 	{
 		Debug.Log("EnemyPoliceGuy: ERROR! NO LEVEL STATUS SCRIPT FOUND.");

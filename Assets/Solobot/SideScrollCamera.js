@@ -5,16 +5,18 @@ var yOffset : float;
 
 var distance : float;
 
-function Start () {
-	if (target) {
-		transform.position.x = target.position.x + xOffset;
-		transform.position.y = target.position.y + yOffset;
-		transform.position.z = target.position.z - distance;
-	}
+var isEnabled : boolean = true;
+
+function Disable() {
+	isEnabled = false;
+}
+
+function Enable() {
+	isEnabled = true;
 }
 
 function Update () {
-	if (target) {
+	if (target && isEnabled) {
 		transform.position.x = target.position.x + xOffset;
 		transform.position.y = target.position.y + yOffset;
 		transform.position.z = target.position.z - distance;
