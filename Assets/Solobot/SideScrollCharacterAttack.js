@@ -58,7 +58,7 @@ function DidPunch ()
 }
 
 function DidShoot () {
-	animation.CrossFadeQueued("punch", 0.1, QueueMode.PlayNow);
+	animation.CrossFadeQueued("shoot", 0.1, QueueMode.PlayNow);
 	yield WaitForSeconds(0.16);
 	var bulletClone : Rigidbody = Instantiate(bullet, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
 	bulletClone.velocity = transform.forward * 10.0;

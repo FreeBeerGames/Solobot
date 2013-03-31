@@ -8,6 +8,7 @@ var maxHealth : int = 6;
 var lives = 4;
 
 // sound effects.
+
 var struckSound: AudioClip;
 var deathSound: AudioClip;
 
@@ -101,7 +102,7 @@ function Die ()
 	
 	var ssCamera : SideScrollCamera = Camera.main.GetComponent(SideScrollCamera);
 	ssCamera.SendMessage("Disable");
-	
+		
 	yield WaitForSeconds(1.6);	// give the sound time to complete.
 	
 	// If we've reached here, the player still has lives remaining, so respawn.
