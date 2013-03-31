@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\SideScrollCharacterAttack.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\3D Platformer Tutorial\Scripts\Misc\Respawn.js">
     <Files>
       <File FileName="Assets\Solobot\SideScrollCharacterAttack.js" Line="29" Column="81" />
       <File FileName="Assets\Solobot\EnemyController.js" Line="1" Column="1" />
