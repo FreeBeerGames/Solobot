@@ -40,3 +40,5 @@ controlled the behavior of the Third Person Demo.
    players `tranform` component.
    
 At this point we were able to get basic side scroller functionality.
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/Nxl_eDH15NA" frameborder="0" allowfullscreen></iframe>
