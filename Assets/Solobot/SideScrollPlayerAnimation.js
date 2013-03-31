@@ -38,7 +38,9 @@ function Start ()
 	animation["buttstomp"].wrapMode = WrapMode.Once;	
 	var punch = animation["punch"];
 	punch.wrapMode = WrapMode.Once;
-
+	
+	animation["shoot"].wrapMode = WrapMode.Once;
+	
 	// We are in full control here - don't let any other animations play when we start
 	animation.Stop();
 	animation.Play("idle");
