@@ -18,7 +18,8 @@ function Start ()
 
 function Update ()
 {
-	var controller : SideScrollController = GetComponent(SideScrollController); 
+	var controller : SideScrollController = GetComponent(SideScrollController);
+	 
 	if(!busy && Input.GetButtonDown ("Fire1") && controller.IsGroundedWithTimeout() && !controller.IsMoving())
 	{	
 		SendMessage ("DidPunch");
