@@ -74,8 +74,12 @@ private var slammed = false;
 
 private var isControllable = true;
 
+private var meshRenderer : SkinnedMeshRenderer;
+
+public var additionalRenderers = [];
 function Awake ()
 {
+	meshRenderer = GetComponentInChildren(SkinnedMeshRenderer);
 	moveDirection = transform.TransformDirection(Vector3.forward);
 }
 
@@ -85,7 +89,7 @@ function Awake ()
 
 function HidePlayer()
 {
-	GameObject.Find("rootJoint").GetComponent(SkinnedMeshRenderer).enabled = false; // stop rendering the player.
+	meshRenderer.enabled = false; // stop rendering the player.
 	isControllable = false;	// disable player controls.
 }
 
@@ -94,7 +98,7 @@ function HidePlayer()
 
 function ShowPlayer()
 {
-	GameObject.Find("rootJoint").GetComponent(SkinnedMeshRenderer).enabled = true; // start rendering the player again.
+	meshRenderer.enabled = true; // start rendering the player again.
 	isControllable = true;	// allow player to control the character again.
 }
 
@@ -392,11 +396,12 @@ function SuperJump (height : float, jumpVelocity : Vector3)
 function Slam (direction : Vector3)
 {
 	verticalSpeed = CalculateJumpVerticalSpeed (1);
-	inAirVelocity = direction * 6;
-	direction.y = 0.6;
+	inAirVelocity.x = direction.x * 6;
+	inAirVelocity.y = direction.y * 6;
+	direction.y = 1.5;
 	Quaternion.LookRotation(-direction);
 	var controller : CharacterController = GetComponent(CharacterController);
-	controller.height = 0.5;
+	controller.height = 1.0;
 	slammed = true;
 	collisionFlags = CollisionFlags.None;
 	SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);

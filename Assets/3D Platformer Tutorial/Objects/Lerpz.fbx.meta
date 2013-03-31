@@ -152,7 +152,7 @@ ModelImporter:
     400138: wristLeft
     400140: wristRight
     4300000: Lerpz
-    7400000: Take 001
+    7400000: shoot
     7400002: walk
     7400004: run
     7400006: kick
@@ -496,6 +496,28 @@ ModelImporter:
       takeName: 
       firstFrame: 161
       lastFrame: 177
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: shoot
+      takeName: Take 001
+      firstFrame: 101
+      lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

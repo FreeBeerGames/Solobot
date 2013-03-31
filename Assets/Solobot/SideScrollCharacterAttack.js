@@ -7,6 +7,8 @@ var punchHitPoints = 1;
 
 var punchSound : AudioClip;
 
+var bullet : Rigidbody;
+
 private var busy = false; 
 
 function Start ()
@@ -22,6 +24,12 @@ function Update ()
 		SendMessage ("DidPunch");
 		busy = true;
 	}
+	
+	if (!busy && Input.GetButtonDown("Fire2") && controller.IsGroundedWithTimeout() && !controller.IsMoving())
+	{
+		SendMessage("DidShoot");
+		busy = true;
+	}
 }
 
 function DidPunch ()
@@ -29,7 +37,7 @@ function DidPunch ()
 	animation.CrossFadeQueued("punch", 0.1, QueueMode.PlayNow);
 	yield WaitForSeconds(punchHitTime);
 	var pos = transform.TransformPoint(punchPosition);
-	var enemies : GameObject[] = [];//GameObject.FindGameObjectsWithTag("Enemy");
+	var enemies : GameObject[] = GameObject.FindGameObjectsWithTag("Enemy");
 	
 	for (var go : GameObject in enemies)
 	{
@@ -42,11 +50,18 @@ function DidPunch ()
 			enemy.SendMessage("ApplyDamage", punchHitPoints);
 			// Play sound.
 			if (punchSound)
-				Debug.Log('Did it');
 				audio.PlayOneShot(punchSound);
 		}
 	}
 	yield WaitForSeconds(punchTime - punchHitTime);
+	busy = false;
+}
+
+function DidShoot () {
+	animation.CrossFadeQueued("punch", 0.1, QueueMode.PlayNow);
+	yield WaitForSeconds(0.16);
+	var bulletClone : Rigidbody = Instantiate(bullet, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
+	bulletClone.velocity = transform.forward * 10.0;
 	busy = false;
 }
 
