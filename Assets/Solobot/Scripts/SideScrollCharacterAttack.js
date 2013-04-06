@@ -1,13 +1,15 @@
-var punchSpeed = 1;
-var punchHitTime = 0.2;
-var punchTime = 0.4;
+var punchSpeed : float = 1;
+var punchHitTime : float = 0.2;
+var punchTime : float = 0.4;
 var punchPosition = new Vector3 (0, 0, 0.8);
-var punchRadius = 1.3;
-var punchHitPoints = 1;
+var punchRadius : float = 1.3;
+var punchHitPoints : int = 1;
 
 var punchSound : AudioClip;
+var shootSound : AudioClip;
 
-var bullet : Rigidbody;
+var projectile : Rigidbody;
+var projectileSpeed : float = 8.0;
 
 private var busy = false; 
 
@@ -26,7 +28,7 @@ function Update ()
 		busy = true;
 	}
 	
-	if (!busy && Input.GetButtonDown("Fire2") && controller.IsGroundedWithTimeout() && !controller.IsMoving())
+	if (!busy && Input.GetButtonDown("Fire2"))
 	{
 		SendMessage("DidShoot");
 		busy = true;
@@ -61,8 +63,10 @@ function DidPunch ()
 function DidShoot () {
 	animation.CrossFadeQueued("shoot", 0.1, QueueMode.PlayNow);
 	yield WaitForSeconds(0.16);
-	var bulletClone : Rigidbody = Instantiate(bullet, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
-	bulletClone.velocity = transform.forward * 10.0;
+	var projectileClone : Rigidbody = Instantiate(projectile, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
+	projectileClone.velocity = transform.forward * projectileSpeed;
+	if (shootSound)
+		audio.PlayOneShot(shootSound, 10);
 	busy = false;
 }
 
