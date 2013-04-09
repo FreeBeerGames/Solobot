@@ -1,4 +1,3 @@
-
 // The speed when walking
 var walkSpeed = 3.0;
 // after trotAfterSeconds of walking we trot with trotSpeed
@@ -15,6 +14,7 @@ var extraJumpHeight = 2.5;
 
 // The gravity for the character
 var gravity = 20.0;
+
 // The gravity in controlled descent mode
 var controlledDescentGravity = 2.0;
 var speedSmoothing = 10.0;
