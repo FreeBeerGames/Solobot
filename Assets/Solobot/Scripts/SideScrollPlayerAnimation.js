@@ -1,6 +1,8 @@
 var runSpeedScale = 1.0;
 var walkSpeedScale = 1.0;
 
+var torso : Transform;
+
 function Start ()
 {
 	// By default loop all animations
@@ -13,8 +15,7 @@ function Start ()
 
 	animation["ledgefall"].layer = 9;	
 	animation["ledgefall"].wrapMode = WrapMode.Loop;
-
-
+	
 	// The jump animation is clamped and overrides all others
 	animation["jump"].layer = 10;
 	animation["jump"].wrapMode = WrapMode.ClampForever;
@@ -35,11 +36,17 @@ function Start ()
 	// we actually use this as a "got hit" animation
 	animation["buttstomp"].speed = 0.15;
 	animation["buttstomp"].layer = 20;
-	animation["buttstomp"].wrapMode = WrapMode.Once;	
-	var punch = animation["punch"];
-	punch.wrapMode = WrapMode.Once;
+	animation["buttstomp"].wrapMode = WrapMode.Once;
+	
+	animation["punch"].wrapMode = WrapMode.Once;
+	animation["punch"].layer = 11;
+	animation["punch"].blendMode = AnimationBlendMode.Blend;
+	animation["punch"].AddMixingTransform(torso);
 	
 	animation["shoot"].wrapMode = WrapMode.Once;
+	animation["shoot"].layer = 11;
+	animation["shoot"].blendMode = AnimationBlendMode.Blend;
+	animation["shoot"].AddMixingTransform(torso);
 	
 	// We are in full control here - don't let any other animations play when we start
 	animation.Stop();
