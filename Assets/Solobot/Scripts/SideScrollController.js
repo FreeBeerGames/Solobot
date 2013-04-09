@@ -1,3 +1,4 @@
+
 // The speed when walking
 var walkSpeed = 3.0;
 // after trotAfterSeconds of walking we trot with trotSpeed
@@ -24,6 +25,7 @@ var trotAfterSeconds = 3.0;
 var canJump = true;
 var canControlDescent = true;
 var canWallJump = false;
+var canChangeDirectionInAir = true;
 
 private var jumpRepeatTime = 0.05;
 private var wallJumpTimeout = 0.15;
@@ -116,9 +118,7 @@ function UpdateSmoothedMovementDirection ()
 	if (h < 0) targetDirection = Vector3(-1,0,0);
 	else if (h > 0) targetDirection = Vector3(1,0,0);
 	
-	// Grounded controls
-	if (grounded)
-	{
+	if(grounded || canChangeDirectionInAir) {
 		// Lock camera for short period when transitioning moving & standing still
 		lockCameraTimer += Time.deltaTime;
 		if (isMoving != wasMoving)
@@ -159,19 +159,15 @@ function UpdateSmoothedMovementDirection ()
 		if (moveSpeed < walkSpeed * 0.3)
 			walkTimeStart = Time.time;
 	}
-	// In air controls
-	else
-	{
+	
+	if (!grounded) {
 		// Lock camera while in air
 		if (jumping)
 			lockCameraTimer = 0.0;
 
 		if (isMoving)
 			inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
-	}
-	
-
-		
+	}	
 }
 
 function ApplyWallJump ()
