@@ -39,12 +39,12 @@ function Start ()
 	animation["buttstomp"].wrapMode = WrapMode.Once;
 	
 	animation["punch"].wrapMode = WrapMode.Once;
-	animation["punch"].layer = 11;
+	animation["punch"].layer = 21;
 	animation["punch"].blendMode = AnimationBlendMode.Blend;
 	animation["punch"].AddMixingTransform(torso);
 	
 	animation["shoot"].wrapMode = WrapMode.Once;
-	animation["shoot"].layer = 11;
+	animation["shoot"].layer = 21;
 	animation["shoot"].blendMode = AnimationBlendMode.Blend;
 	animation["shoot"].AddMixingTransform(torso);
 	

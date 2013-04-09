@@ -10,7 +10,6 @@ var dropMax = 0;
 // sound clips:
 var struckSound : AudioClip;
 
-
 private var dead = false;
 
 function ApplyDamage (damage : int)
