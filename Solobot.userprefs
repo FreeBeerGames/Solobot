@@ -1,15 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\3D Platformer Tutorial\Scripts\Misc\Respawn.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\SideScrollCharacterAttack.js">
     <Files>
-      <File FileName="Assets\Solobot\SideScrollCharacterAttack.js" Line="29" Column="81" />
-      <File FileName="Assets\Solobot\EnemyController.js" Line="1" Column="1" />
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\SideScrollController.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\PlayerStatus.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\SideScrollPlayerAnimation.js" Line="1" Column="1" />
+      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="55" Column="26" />
       <File FileName="Assets\3D Platformer Tutorial\Scripts\Misc\Respawn.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\FalloutDeath.js" Line="1" Column="1" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollPlayerAnimation.js" Line="128" Column="3" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="71" Column="33" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="111" Column="27" />
+      <File FileName="Assets\Solobot\Scripts\EnemyController.js" Line="24" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -78,7 +78,8 @@ private var isControllable = true;
 
 private var meshRenderer : SkinnedMeshRenderer;
 
-public var additionalRenderers = [];
+public var hasJetpack : boolean = false;
+
 function Awake ()
 {
 	meshRenderer = GetComponentInChildren(SkinnedMeshRenderer);
@@ -104,6 +105,30 @@ function ShowPlayer()
 	isControllable = true;	// allow player to control the character again.
 }
 
+private var prevJumpHeight : float;
+private var prevExtraJumpHeight : float;
+
+function EnableJetpack() {
+	hasJetpack = true;
+	canControlDescent = true;
+	prevJumpHeight = jumpHeight;
+	prevExtraJumpHeight = extraJumpHeight;
+	jumpHeight = 5.0;
+	extraJumpHeight = 5.0;
+	SendMessage("EnableJetpack");
+}
+
+function DisableJetpack() {
+	SendMessage("DisableJetpack");
+	canControlDescent = false;
+	jumpHeight = prevJumpHeight;
+	extraJumpHeight = prevExtraJumpHeight;
+	hasJetpack = false;
+}
+
+function IsJetpackEnabled() {
+	return hasJetpack;
+}
 
 function UpdateSmoothedMovementDirection ()
 {
@@ -115,8 +140,8 @@ function UpdateSmoothedMovementDirection ()
 		
 	// Target direction is either positive or negative y axis in side scroller
 	var targetDirection = Vector3.zero;
-	if (h < 0) targetDirection = Vector3(-1,0,0);
-	else if (h > 0) targetDirection = Vector3(1,0,0);
+	if (h < 0) targetDirection = Vector3(-1,0,-transform.position.z);
+	else if (h > 0) targetDirection = Vector3(1,0,-transform.position.z);
 	
 	if(grounded || canChangeDirectionInAir) {
 		// Lock camera for short period when transitioning moving & standing still

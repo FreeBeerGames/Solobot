@@ -148,7 +148,7 @@ function Attack ()
 	time = 0.0;
 	var direction : Vector3;
 	
-	while (angle > 5 || time < attackTurnTime)
+	while (angle >= 1 || time < attackTurnTime)
 	{
 		time += Time.deltaTime;
 		angle = Mathf.Abs(RotateTowardsPosition(target.position, rotateSpeed));
@@ -164,7 +164,6 @@ function Attack ()
 	var lostSight = false;
 	while (timer < extraRunTime)
 	{
-		angle = RotateTowardsPosition(target.position, attackRotateSpeed);
 			
 		// The angle of our forward direction and the player position is larger than 50 degrees
 		// That means he is out of sight
