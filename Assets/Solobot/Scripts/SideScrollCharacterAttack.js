@@ -42,6 +42,9 @@ function DidPunch ()
 	var pos = transform.TransformPoint(punchPosition);
 	var enemies : GameObject[] = GameObject.FindGameObjectsWithTag("Enemy");
 	
+	if (punchSound)
+		AudioSource.PlayClipAtPoint(punchSound, transform.position);
+	
 	for (var go : GameObject in enemies)
 	{
 		var enemy = go.GetComponent(EnemyDamage);
@@ -49,12 +52,7 @@ function DidPunch ()
 			continue;
 			
 		if (Vector3.Distance(enemy.transform.position, pos) < punchRadius)
-		{
 			enemy.SendMessage("ApplyDamage", punchHitPoints);
-			// Play sound.
-			if (punchSound)
-				audio.PlayOneShot(punchSound);
-		}
 	}
 	yield WaitForSeconds(punchTime - punchHitTime);
 	busy = false;
@@ -66,7 +64,7 @@ function DidShoot () {
 	var projectileClone : Rigidbody = Instantiate(projectile, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
 	projectileClone.velocity = transform.forward * projectileSpeed;
 	if (shootSound)
-		audio.PlayOneShot(shootSound, 10);
+		AudioSource.PlayClipAtPoint(shootSound, transform.position);
 	busy = false;
 }
 
