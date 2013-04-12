@@ -5,66 +5,60 @@ public var maxIntensity : double = 8.0;
 
 public var audioClip : AudioClip;
 
-function Start () { 
-	var playerController : SideScrollController = GetComponent(SideScrollController);
+private var playerController : SideScrollController;
+private var particles : Component [];
+private var childLight : Light;
+
+function Start () {
+	playerController = GetComponent(SideScrollController);	
+	particles = GetComponentsInChildren(ParticleEmitter);
+	childLight = GetComponentInChildren(Light);
+	
+	if (minIntensity < 0) minIntensity = 0.0;
+	else if (maxIntensity > 8.0) maxIntensity = 8.0;
  
- 	if (playerController.IsJetpackEnabled()) {
- 
-	 	if (minIntensity < 0) minIntensity = 0.0;
-		else if (maxIntensity > 8.0) maxIntensity = 8.0;
-	 
-		// The script ensures an AudioSource component is always attached.
-	 	audio.clip = audioClip;
-	 	
-		// First, we make sure the AudioSource component is initialized correctly:
-		audio.loop = false;
-		audio.Stop();
-		
-		// Init the particles to not emit and switch off the spotlights:
-		var particles : Component[] = GetComponentsInChildren(ParticleEmitter);
-		var childLight : Light = GetComponentInChildren(Light);
-	 
-		for (var p : ParticleEmitter in particles)
-		{
-			p.emit = false;
-		}
-		childLight.enabled = false;
-	 
-		// Once every frame  update particle emission and lights
-		while (true)
-		{
-			var isFlying = playerController.IsJumping();
-	 
-			// handle thruster sound effect
-			if (isFlying)
+	// The script ensures an AudioSource component is always attached.
+ 	audio.clip = audioClip;
+ 	
+	// First, we make sure the AudioSource component is initialized correctly:
+	audio.loop = false;
+	audio.Stop();
+	
+	for (var p : ParticleEmitter in particles)
+	{
+		p.emit = false;
+	}
+	childLight.enabled = false;
+
+	// Once every frame  update particle emission and lights
+	while (true)
+	{
+		if (playerController.IsJetpackEnabled()) {
+			var isJetpackActive = playerController.IsJumping();
+			if (isJetpackActive)
 			{
 				if (!audio.isPlaying)
 				{
 					audio.Play();
 				}
+				litAmount = Mathf.Clamp(litAmount + Time.deltaTime * 2, minIntensity, maxIntensity);
 			}
 			else
 			{
 				audio.Stop();
+				litAmount = Mathf.Clamp(litAmount - Time.deltaTime * 2, minIntensity, maxIntensity);
 			}
-	 
-	 
 			for (var p : ParticleEmitter in particles)
 			{
-				p.emit = isFlying;
+				p.emit = isJetpackActive;
 			}
-	 
-			if(isFlying)
-				litAmount = Mathf.Clamp(litAmount + Time.deltaTime * 2, minIntensity, maxIntensity);
-			else
-				litAmount = Mathf.Clamp(litAmount - Time.deltaTime * 2, minIntensity, maxIntensity);
 				
-			childLight.enabled = isFlying;
+			childLight.enabled = isJetpackActive;
 			childLight.intensity = litAmount;
-			yield;
 		}
-		audio.clip = null;
+		yield;
 	}
+	audio.clip = null;
 }
  
 @script RequireComponent(AudioSource)

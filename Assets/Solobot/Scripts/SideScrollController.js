@@ -13,19 +13,20 @@ var jumpHeight = 0.5;
 // We add extraJumpHeight meters on top when holding the button down longer while jumping
 var extraJumpHeight = 2.5;
 
-// The gravity for the character
-var gravity = 20.0;
+/** Gravity floating point settings */
+public var gravity : float = 20.0;
+public var controlledDescentGravity : float = 2.0;
+public var speedSmoothing : float = 10.0;
+public var rotateSpeed : float = 500.0;
 
-// The gravity in controlled descent mode
-var controlledDescentGravity = 2.0;
-var speedSmoothing = 10.0;
-var rotateSpeed = 500.0;
+/** Transistions from states walk -> trot after this many seconds */
 var trotAfterSeconds = 3.0;
 
-var canJump = true;
-var canControlDescent = true;
-var canWallJump = false;
-var canChangeDirectionInAir = true;
+/** Jumping flags */
+public var canJump : boolean = true;
+public var canControlDescent : boolean = true;
+public var canWallJump : boolean = false;
+public var canChangeDirectionInAir : boolean = true;
 
 private var jumpRepeatTime = 0.05;
 private var wallJumpTimeout = 0.15;
@@ -78,7 +79,10 @@ private var isControllable = true;
 
 private var meshRenderer : SkinnedMeshRenderer;
 
+/** Jetpack editor flag and private support variables */
 public var hasJetpack : boolean = false;
+private var hasJetpackListener : boolean = false;
+private var prevJumpHeight : float;
 
 function Awake ()
 {
@@ -86,49 +90,45 @@ function Awake ()
 	moveDirection = transform.TransformDirection(Vector3.forward);
 }
 
+
 // This next function responds to the "HidePlayer" message by hiding the player. 
 // The message is also 'replied to' by identically-named functions in the collision-handling scripts.
 // - Used by the LevelStatus script when the level completed animation is triggered.
-
 function HidePlayer()
 {
 	meshRenderer.enabled = false; // stop rendering the player.
 	isControllable = false;	// disable player controls.
 }
 
+
 // This is a complementary function to the above. We don't use it in the tutorial, but it's included for
 // the sake of completeness. (I like orthogonal APIs; so sue me!)
-
 function ShowPlayer()
 {
 	meshRenderer.enabled = true; // start rendering the player again.
 	isControllable = true;	// allow player to control the character again.
 }
 
-private var prevJumpHeight : float;
-private var prevExtraJumpHeight : float;
 
 function EnableJetpack() {
 	hasJetpack = true;
 	canControlDescent = true;
 	prevJumpHeight = jumpHeight;
-	prevExtraJumpHeight = extraJumpHeight;
 	jumpHeight = 5.0;
-	extraJumpHeight = 5.0;
-	SendMessage("EnableJetpack");
 }
 
+
 function DisableJetpack() {
-	SendMessage("DisableJetpack");
+	hasJetpack = false;
 	canControlDescent = false;
 	jumpHeight = prevJumpHeight;
-	extraJumpHeight = prevExtraJumpHeight;
-	hasJetpack = false;
 }
+
 
 function IsJetpackEnabled() {
 	return hasJetpack;
 }
+
 
 function UpdateSmoothedMovementDirection ()
 {
@@ -302,6 +302,15 @@ function DidJump ()
 }
 
 function Update() {
+
+	if (hasJetpackListener != hasJetpack) {
+		if (hasJetpack) {
+			SendMessage("EnableJetpack");
+		} else {
+			SendMessage("DisableJetpack");
+		}
+		hasJetpackListener = hasJetpack;
+	}
 	
 	if (!isControllable)
 	{

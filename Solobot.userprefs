@@ -1,13 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\SideScrollCharacterAttack.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js">
     <Files>
-      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="55" Column="26" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="81" Column="18" />
+      <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Scripts\Misc\Respawn.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollPlayerAnimation.js" Line="128" Column="3" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="71" Column="33" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="111" Column="27" />
-      <File FileName="Assets\Solobot\Scripts\EnemyController.js" Line="24" Column="24" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollPlayerAnimation.js" Line="19" Column="10" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="50" Column="37" />
+      <File FileName="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js" Line="41" Column="6" />
+      <File FileName="Assets\Teleporter\Standard Assets\Character Controllers\Sources\Scripts\_ThirdPersonController.js" Line="186" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
