@@ -17,7 +17,7 @@ TextureImporter:
     heightScale: .100000001
     normalMapFilter: 0
   isReadable: 0
-  grayScaleToAlpha: 1
+  grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
@@ -27,9 +27,9 @@ TextureImporter:
     aniso: 1
     mipBias: 0
     wrapMode: 0
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
-  textureType: -1
+  textureType: 0
   buildTargetSettings: []
   userData: 
