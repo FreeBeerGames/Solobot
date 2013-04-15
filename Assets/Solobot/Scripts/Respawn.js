@@ -70,21 +70,22 @@ function Start()
 		SetActive();
 }
 
-function OnTriggerEnter()
+function OnTriggerEnter(collider : Collider)
 {
 	if (currentRespawn != this)		// make sure we're not respawning or re-activating an already active pad!
 	{
-		// turn the old respawn point off
-		currentRespawn.SetInactive ();
-		
-		// play the "Activated" one-shot sound effect if one has been supplied:
-		if (SFXRespawnActivate)
-			AudioSource.PlayClipAtPoint(SFXRespawnActivate, transform.position, SFXVolume);
-
-		// Set the current respawn point to be us and make it visible.
-		currentRespawn = this;
-		
-		SetActive ();
+		if (collider.gameObject.CompareTag('Player')) {
+			// turn the old respawn point off
+			currentRespawn.SetInactive ();
+			// play the "Activated" one-shot sound effect if one has been supplied:
+			var noSoundFlag = true;
+			FireEffect(noSoundFlag);
+			if (SFXRespawnActivate)
+				AudioSource.PlayClipAtPoint(SFXRespawnActivate, transform.position, SFXVolume);
+			// Set the current respawn point to be us and make it visible.
+			currentRespawn = this;		
+			SetActive ();
+		}
 	}
 }
 
@@ -93,7 +94,6 @@ function SetActive ()
 	emitterActive.emit = true;
 	emitterInactive.emit = false;
 	respawnLight.intensity = 1.5;	
-
 	audio.Play();		// start playing the sound clip assigned in the inspector
 }
 
@@ -102,25 +102,31 @@ function SetInactive ()
 	emitterActive.emit = false;
 	emitterInactive.emit = true;
 	respawnLight.intensity = 1.5;		
-
 	audio.Stop();	// stop playing the active sound clip.			
 }
 
-function FireEffect () 
-{
-	// Launch all 3 sets of particle systems.
+/** Fires all 3 particle emitters at the same time resulting in a
+    burst of particles as a concentrated ring. */
+function EmitParticleBurst() {
 	emitterRespawn1.Emit();
 	emitterRespawn2.Emit();
 	emitterRespawn3.Emit();
+}
 
-	respawnLight.intensity = 3.5;
+function FireEffect (noSoundFlag : boolean) 
+{
+	EmitParticleBurst();
 		
-	if (SFXPlayerRespawn)
+	if (SFXPlayerRespawn && !noSoundFlag)
 	{	// if we have a 'player is respawning' sound effect, play it now.
 		AudioSource.PlayClipAtPoint(SFXPlayerRespawn, transform.position, SFXVolume);
 	}
 	
 	yield WaitForSeconds (2);
 	
-	respawnLight.intensity = 2.0;
+	respawnLight.intensity = 3.5;
+}
+
+function FireEffect () {
+	FireEffect(false);
 }
