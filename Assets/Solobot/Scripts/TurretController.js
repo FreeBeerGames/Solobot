@@ -10,11 +10,14 @@ public var secondsBetweenBursts : float = 3.0;
 public var projectilesPerBurst : int = 3;
 public var secondsBetweenProjectiles = 0.3;
 
-public var target : Transform;
+private var target : Transform;
 private var isFiring : boolean = false;
 private var targetDistance : float;
 
 function Start () {
+	var player = GameObject.FindWithTag('Player');
+	if (!player) Debug.Log('TurretController.js: Player target is null.');
+	else target = player.transform;
 	if (secondsBetweenBursts < secondsBetweenProjectiles * projectilesPerBurst) {
 		var debugString : String = "TurretController.js --> public variable ";
 		debugString += "secondsBetweenBursts must be greater than or equal to -->";
