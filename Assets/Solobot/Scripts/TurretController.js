@@ -6,11 +6,23 @@ public var sightingDistance : float = 30.0;
 public var projectile : Rigidbody;
 public var projectileSpeed : float = 8.0;
 
+public var secondsBetweenBursts : float = 3.0;
+public var projectilesPerBurst : int = 3;
+public var secondsBetweenProjectiles = 0.3;
+
 public var target : Transform;
-
 private var isFiring : boolean = false;
-
 private var targetDistance : float;
+
+function Start () {
+	if (secondsBetweenBursts < secondsBetweenProjectiles * projectilesPerBurst) {
+		var debugString : String = "TurretController.js --> public variable ";
+		debugString += "secondsBetweenBursts must be greater than or equal to -->";
+		debugString += "   (secondsBetweenProjectiles * projectilePerBurst)";
+		Debug.Log(debugString);
+		secondsBetweenBursts = secondsBetweenProjectiles * projectilesPerBurst;
+	} 
+}
 
 function LateUpdate () {
 	targetDistance = weaponTransform.position.x - target.position.x;
@@ -36,18 +48,12 @@ function RotateTurretArms() {
 
 function FireTurret() {
 	while (true) {
-		var projectileClone1 : Rigidbody = Instantiate(projectile, Vector3(weaponTransform.position.x - 1, weaponTransform.position.y, weaponTransform.position.z), weaponTransform.rotation);
-		projectileClone1.velocity = weaponTransform.forward * projectileSpeed;
-		yield WaitForSeconds(0.5);
-		
-		var projectileClone2 : Rigidbody = Instantiate(projectile, Vector3(weaponTransform.position.x - 1, weaponTransform.position.y, weaponTransform.position.z), weaponTransform.rotation);
-		projectileClone2.velocity = weaponTransform.forward * projectileSpeed;
-		yield WaitForSeconds(0.5);
-		
-		var projectileClone3 : Rigidbody = Instantiate(projectile, Vector3(weaponTransform.position.x - 1, weaponTransform.position.y, weaponTransform.position.z), weaponTransform.rotation);
-		projectileClone3.velocity = weaponTransform.forward * projectileSpeed;
-		yield WaitForSeconds(0.5);
-		
-		yield WaitForSeconds(3);
+		var projectileClone : Rigidbody;
+		for (var i = 0; i < projectilesPerBurst; i++) {
+			projectileClone = Instantiate(projectile, Vector3(weaponTransform.position.x - 1, weaponTransform.position.y, weaponTransform.position.z), weaponTransform.rotation);
+			projectileClone.velocity = weaponTransform.forward * projectileSpeed;
+			yield WaitForSeconds(secondsBetweenProjectiles);
+		}
+		yield WaitForSeconds(secondsBetweenBursts);
 	}
 }

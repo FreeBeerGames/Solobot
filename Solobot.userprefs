@@ -1,16 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\SideScrollController.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\TurretController.js">
     <Files>
+      <File FileName="Assets\Solobot\Scripts\TurretController.js" Line="32" Column="20" />
       <File FileName="Assets\Solobot\Scripts\FalloutDeath.js" Line="1" Column="1" />
       <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="357" Column="20" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="35" Column="3" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Scripts\Camera\SmoothLookAt.js" Line="1" Column="1" />
       <File FileName="Assets\Solobot\Scripts\EnergyBall.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\PlayerStatus.js" Line="24" Column="24" />
-      <File FileName="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js" Line="65" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\DroppableMover.js" Line="11" Column="2" />
+      <File FileName="Assets\Solobot\Scripts\PlayerStatus.js" Line="1" Column="1" />
+      <File FileName="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js" Line="1" Column="1" />
+      <File FileName="Assets\Solobot\Scripts\DroppableMover.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
