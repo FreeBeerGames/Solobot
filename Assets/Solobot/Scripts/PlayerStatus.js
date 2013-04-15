@@ -2,20 +2,36 @@
 
 // Keeps track of inventory, health, lives, etc.
 
-
-var health : int = 6;
-var maxHealth : int = 6;
-var lives = 4;
+public var health : int = 6;
+public var maxHealth : int = 6;
+public var lives = 4;
 
 // sound effects.
 
-var struckSound: AudioClip;
-var deathSound: AudioClip;
+public var struckSound: AudioClip;
+public var deathSound: AudioClip;
 
 private var levelStateMachine : LevelStatus;		// link to script that handles the level-complete sequence.
 
 private var remainingItems : int;	// total number to pick up on this level. Grabbed from LevelStatus.
 
+enum Powerup {None = 0, Jetpack = 1 }
+
+public var currentPowerup : Powerup = Powerup.None;
+
+function SetPowerup(newPowerup : Powerup) {
+	if (currentPowerup != newPowerup) {
+		DisableAllPowerups();
+		if (newPowerup == Powerup.Jetpack) SendMessage("EnableJetpack");
+		// else if other powerups here
+		
+		currentPowerup = newPowerup;
+	}
+}
+
+function DisableAllPowerups() {
+	SendMessage("DisableJetpack");
+}
 
 function Awake()
 {

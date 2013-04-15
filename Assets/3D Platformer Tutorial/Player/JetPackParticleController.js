@@ -9,6 +9,8 @@ private var playerController : SideScrollController;
 private var particles : Component [];
 private var childLight : Light;
 
+private var isJetpackActive : boolean = false;
+
 function Start () {
 	playerController = GetComponent(SideScrollController);	
 	particles = GetComponentsInChildren(ParticleEmitter);
@@ -34,7 +36,7 @@ function Start () {
 	while (true)
 	{
 		if (playerController.IsJetpackEnabled()) {
-			var isJetpackActive = playerController.IsJumping();
+			isJetpackActive = playerController.IsJumping();
 			if (isJetpackActive)
 			{
 				if (!audio.isPlaying)
@@ -60,5 +62,9 @@ function Start () {
 	}
 	audio.clip = null;
 }
- 
+
+function IsActive() {
+	return isJetpackActive;
+}
+
 @script RequireComponent(AudioSource)

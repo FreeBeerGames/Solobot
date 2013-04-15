@@ -1,16 +1,13 @@
-var hitPoints = 3;
+public var hitPoints : int = 3;
+public var explosionPrefab : Transform;
+public var deadModelPrefab : Transform;
+public var dropPrefab : DroppableMover;
+public var dropMin : int = 0;
+public var dropMax : int = 0;
+public var dropPercentage : float = 0.5;
+public var struckSound : AudioClip;
 
-var explosionPrefab : Transform;
-var deadModelPrefab : Transform;
-var healthPrefab : DroppableMover;
-var fuelPrefab : DroppableMover;
-var dropMin = 0;
-var dropMax = 0;
-
-// sound clips:
-var struckSound : AudioClip;
-
-private var dead = false;
+private var dead : boolean = false;
 
 function ApplyDamage (damage : int)
 {
@@ -56,6 +53,7 @@ function Die ()
 	for (var i=0;i<toDrop;i++)
 	{
 		direction = Random.onUnitSphere;	// pick a random direction to throw the pickup.
+		direction.z = 0;		// make sure we land on z = 0 path
 		if(direction.y < 0)
 			direction.y = -direction.y;	// make sure the pickup isn't thrown downwards
 		
@@ -65,10 +63,8 @@ function Die ()
 		var dropped : DroppableMover;
 
 		// select a pickup type at random
-		if(Random.value > 0.5)
-			dropped = Instantiate(healthPrefab, dropPosition, Quaternion.identity);
-		else
-			dropped = Instantiate(fuelPrefab, dropPosition, Quaternion.identity);
+		if (Random.value > 1 - dropPercentage)
+			dropped = Instantiate(dropPrefab, dropPosition, Quaternion.identity);
 
 		// set the pickup in motion
 		dropped.Bounce(direction * 4 * (Random.value + 0.2));
