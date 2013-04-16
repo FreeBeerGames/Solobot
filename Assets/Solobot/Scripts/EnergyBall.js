@@ -4,6 +4,8 @@ var range : int = 60;
 var explosion : Transform;
 var damageHitPoints : int = 1;
 
+var damageTag : String;
+
 private var startPosition : Vector3;
 
 function Start() {
@@ -24,7 +26,7 @@ function OnCollisionEnter(collision : Collision) {
 	
 	Destroy(gameObject);
 	
-	if(collisionObj.CompareTag('Enemy')) {
+	if(collisionObj.CompareTag(damageTag)) {
 		collisionObj.SendMessage("ApplyDamage", damageHitPoints);
 	}
 }
