@@ -11,24 +11,25 @@ var shootSound : AudioClip;
 var projectile : Rigidbody;
 var projectileSpeed : float = 8.0;
 
-private var busy = false; 
+private var busy = false;
+
+private var controller : SideScrollController;
 
 function Start ()
 {
-	animation["punch"].speed = punchSpeed;	
+	animation["punch"].speed = punchSpeed;
+	controller = GetComponent(SideScrollController);
 }
 
 function Update ()
-{
-	var controller : SideScrollController = GetComponent(SideScrollController);
-	 
-	if(!busy && Input.GetButtonDown ("Fire1"))
+{	 
+	if(!busy && controller.IsControllable() && Input.GetButtonDown ("Fire1"))
 	{	
 		SendMessage ("DidPunch");
 		busy = true;
 	}
 	
-	if (!busy && Input.GetButtonDown("Fire2"))
+	if (!busy && controller.IsControllable() && Input.GetButtonDown("Fire2"))
 	{
 		SendMessage("DidShoot");
 		busy = true;

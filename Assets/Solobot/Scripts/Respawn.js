@@ -15,47 +15,38 @@ Respawn objects also require a simple collider, so the player can activate them.
 
 */
 
-var initialRespawn : Respawn;	// set this to the initial respawn point for the level.
+public var initialRespawn : Respawn;	// set this to the initial respawn point for the level.
 
-var RespawnState = 0;
-
-// Sound effects:
+/** Sound Effects Settings */
 var SFXPlayerRespawn: AudioClip;
 var SFXRespawnActivate: AudioClip;
 var SFXRespawnActiveLoop: AudioClip;
-
 var SFXVolume: float;	// volume for one-shot sounds.
 
-// references for the various particle emitters...
+/** Respawn prefab particle emitters and lights */
 private var emitterActive: ParticleEmitter;
 private var emitterInactive: ParticleEmitter;
 private var emitterRespawn1: ParticleEmitter;
 private var emitterRespawn2: ParticleEmitter;
 private var emitterRespawn3: ParticleEmitter;
-
-// ...and for the light:
 private var respawnLight: Light;
 
-
-// The currently active respawn point. Static, so all instances of this script will share this variable.
+/** Currently active respawn, STATIC VARIABLE SHARED BETWEEN ALL RESPAWN PREFABS IN THE GAME */
 static var currentRespawn : Respawn;
+
+private var isActive : boolean = false;
 
 function Start()
 {	
-	// Get some of the objects we need later.
-	// This is often done in a script's Start function. That way, we've got all our initialization code in one place, 
-	// And can simply count on the code being fine.
+	/** Cache access to respawn particle emitters */
 	emitterActive = transform.Find("RSParticlesActive").GetComponent(ParticleEmitter);
 	emitterInactive = transform.Find("RSParticlesInactive").GetComponent(ParticleEmitter);
 	emitterRespawn1 = transform.Find("RSParticlesRespawn1").GetComponent(ParticleEmitter);
 	emitterRespawn2 = transform.Find("RSParticlesRespawn2").GetComponent(ParticleEmitter);
 	emitterRespawn3 = transform.Find("RSParticlesRespawn3").GetComponent(ParticleEmitter);
-
 	respawnLight = transform.Find("RSSpotlight").GetComponent(Light);
-
-	RespawnState = 0;
 	
-	// set up the looping "RespawnActive" sound, but leave it switched off for now:
+	/** Setup to loop the respawn active sound effect */
 	if (SFXRespawnActiveLoop)
 	{
 		audio.clip = SFXRespawnActiveLoop;
@@ -63,70 +54,79 @@ function Start()
 		audio.playOnAwake = false;
 	}
 	
-	// Assign the respawn point to be this one - Since the player is positioned on top of a respawn point, it will come in and overwrite it.
-	// This is just to make sure that we always have a respawn point.
+	/** Initialize the current respawn point to the initial respawn prefab */
 	currentRespawn = initialRespawn;
-	if (currentRespawn == this)
-		SetActive();
+	if (currentRespawn == this)	SetActive();
 }
 
+
+/** Collision Trigger Handler for activating inactive respawn points when the player steps on them. */
 function OnTriggerEnter(collider : Collider)
-{
-	if (currentRespawn != this)		// make sure we're not respawning or re-activating an already active pad!
+{	/** Only detect collisions on the static 'current' respawn prefab, and only from GameObjects with the
+	    'Player' tag. Built-in and self-defined object level tags for quick object lookup is more efficient
+	    than other methods available such as GameObject.Find(string), which is much slower. */
+	if (currentRespawn != this && collider.gameObject.CompareTag('Player'))
 	{
-		if (collider.gameObject.CompareTag('Player')) {
-			// turn the old respawn point off
-			currentRespawn.SetInactive ();
-			// play the "Activated" one-shot sound effect if one has been supplied:
-			var noSoundFlag = true;
-			FireEffect(noSoundFlag);
-			if (SFXRespawnActivate)
-				AudioSource.PlayClipAtPoint(SFXRespawnActivate, transform.position, SFXVolume);
-			// Set the current respawn point to be us and make it visible.
-			currentRespawn = this;		
-			SetActive ();
-		}
+		/** Set the curret respawn inactive so the new respawn point can be activated */
+		currentRespawn.SetInactive ();
+		
+		/** Fire our particle burst effect and play sound effects depending on what is available */
+		if (SFXRespawnActivate) FireEffect(SFXRespawnActivate);
+		else if (SFXPlayerRespawn) FireEffect();
+		
+		/** Set static currentRespawn variable to point at this particular respawn prefab.
+			The player will now be respawned to this point on player death until another
+			previously unactivated respawn point is activated by player contact */
+		currentRespawn = this;		
+		SetActive ();
 	}
 }
 
+/** Sets active state for this particular respawn prefab */
 function SetActive () 
 {
+	isActive = true;
 	emitterActive.emit = true;
 	emitterInactive.emit = false;
-	respawnLight.intensity = 1.5;	
-	audio.Play();		// start playing the sound clip assigned in the inspector
+	respawnLight.intensity = 3.5;	
+	audio.Play();
 }
 
+/** Sets inactive state for this particular respawn prefab */
 function SetInactive () 
 {
 	emitterActive.emit = false;
 	emitterInactive.emit = true;
 	respawnLight.intensity = 1.5;		
-	audio.Stop();	// stop playing the active sound clip.			
+	audio.Stop();
+	isActive = false;
 }
 
-/** Fires all 3 particle emitters at the same time resulting in a
-    burst of particles as a concentrated ring. */
+function IsActive() { return isActive; }
+
+/** Emit a burst of particles upward in a concentrated ring */
 function EmitParticleBurst() {
 	emitterRespawn1.Emit();
 	emitterRespawn2.Emit();
 	emitterRespawn3.Emit();
 }
 
-function FireEffect (noSoundFlag : boolean) 
+/** Brightens the light intensity, emit's a particle burst and plays the
+    given AudioClip before lowering the intensity of the light again. */
+function FireEffect (sfxClip : AudioClip) 
 {
+	respawnLight.intensity = 3.5;
 	EmitParticleBurst();
-		
-	if (SFXPlayerRespawn && !noSoundFlag)
+	if (sfxClip)
 	{	// if we have a 'player is respawning' sound effect, play it now.
-		AudioSource.PlayClipAtPoint(SFXPlayerRespawn, transform.position, SFXVolume);
+		AudioSource.PlayClipAtPoint(sfxClip, transform.position, SFXVolume);
 	}
 	
 	yield WaitForSeconds (2);
-	
-	respawnLight.intensity = 3.5;
+	respawnLight.intensity = 2.0;
 }
 
+/** Create default arguments *indirectly* by utilizing function overloading */
 function FireEffect () {
-	FireEffect(false);
+	FireEffect(SFXPlayerRespawn);
 }

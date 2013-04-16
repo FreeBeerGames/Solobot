@@ -94,8 +94,8 @@ function Awake ()
 // - Used by the LevelStatus script when the level completed animation is triggered.
 function HidePlayer()
 {
-	meshRenderer.enabled = false; // stop rendering the player.
-	isControllable = false;	// disable player controls.
+	meshRenderer.enabled = false;
+	isControllable = false;
 }
 
 
@@ -106,6 +106,8 @@ function ShowPlayer()
 	meshRenderer.enabled = true; // start rendering the player again.
 	isControllable = true;	// allow player to control the character again.
 }
+
+function IsControllable() { return isControllable; }
 
 function EnableJetpack() {
 	if (!IsJetpackEnabled()) {
