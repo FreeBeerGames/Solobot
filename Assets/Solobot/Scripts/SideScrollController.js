@@ -80,9 +80,8 @@ private var isControllable = true;
 private var meshRenderer : SkinnedMeshRenderer;
 
 /** Jetpack editor flag and private support variables */
-public var hasJetpack : boolean = false;
-private var hasJetpackListener : boolean = false;
-private var prevJumpHeight : float;
+private var hasJetpack : boolean = false;
+public var jetpackJumpHeightBoost : float = 5.0;
 
 function Awake ()
 {
@@ -90,14 +89,13 @@ function Awake ()
 	moveDirection = transform.TransformDirection(Vector3.forward);
 }
 
-
 // This next function responds to the "HidePlayer" message by hiding the player. 
 // The message is also 'replied to' by identically-named functions in the collision-handling scripts.
 // - Used by the LevelStatus script when the level completed animation is triggered.
 function HidePlayer()
 {
-	meshRenderer.enabled = false; // stop rendering the player.
-	isControllable = false;	// disable player controls.
+	meshRenderer.enabled = false;
+	isControllable = false;
 }
 
 
@@ -109,19 +107,22 @@ function ShowPlayer()
 	isControllable = true;	// allow player to control the character again.
 }
 
+function IsControllable() { return isControllable; }
 
 function EnableJetpack() {
-	hasJetpack = true;
-	canControlDescent = true;
-	prevJumpHeight = jumpHeight;
-	jumpHeight = 5.0;
+	if (!IsJetpackEnabled()) {
+		hasJetpack = true;
+		canControlDescent = true;
+		jumpHeight += jetpackJumpHeightBoost;
+	}
 }
 
-
 function DisableJetpack() {
-	hasJetpack = false;
-	canControlDescent = false;
-	jumpHeight = prevJumpHeight;
+	if (IsJetpackEnabled()) {
+		hasJetpack = false;
+		canControlDescent = false;
+		jumpHeight -= jetpackJumpHeightBoost;
+	}
 }
 
 
@@ -302,27 +303,13 @@ function DidJump ()
 }
 
 function Update() {
-
-	if (hasJetpackListener != hasJetpack) {
-		if (hasJetpack) {
-			SendMessage("EnableJetpack");
-		} else {
-			SendMessage("DisableJetpack");
-		}
-		hasJetpackListener = hasJetpack;
-	}
+	/** Kills all user inputs if controllable flag set false */
+	if (!isControllable) Input.ResetInputAxes();
 	
-	if (!isControllable)
-	{
-		// kill all inputs if not controllable.
-		Input.ResetInputAxes();
-	}
-
-	if (Input.GetButtonDown ("Jump"))
-	{
-		lastJumpButtonTime = Time.time;
-	}
-
+	/** Record the most recent jump time */
+	if (Input.GetButtonDown ("Jump")) lastJumpButtonTime = Time.time;
+	
+	/** Update the player's direction */
 	UpdateSmoothedMovementDirection();
 	
 	// Apply gravity
@@ -336,19 +323,19 @@ function Update() {
 	if (canWallJump)
 		ApplyWallJump();
 
-	// Apply jumping logic
+	/** Apply jumping logic every update based on last jump time */
 	ApplyJumping ();
 	
-	// Calculate actual motion
+	/** Use everything to calculate our final actual movement */
 	var movement = moveDirection * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
 	movement *= Time.deltaTime;
 	
-	// Move the controller
+	/** Pass newly calculated movement data to the character controller */
 	var controller : CharacterController = GetComponent(CharacterController);
 	wallJumpContactNormal = Vector3.zero;
 	collisionFlags = controller.Move(movement);
 	
-	// Set rotation to the move direction
+	/** Apply slamming from enemy melees */
 	if (IsGrounded())
 	{
 		if(slammed) // we got knocked over by an enemy. We need to reset some stuff
@@ -374,7 +361,7 @@ function Update() {
 		}
 	}	
 	
-	// We are in jump mode but just became grounded
+	/** Set grounded time and apply landing logic when necessary */
 	if (IsGrounded())
 	{
 		lastGroundedTime = Time.time;

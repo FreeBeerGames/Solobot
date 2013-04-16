@@ -1,9 +1,8 @@
-enum PickupType { Health = 0, FuelCell = 1 }
-var pickupType = PickupType.FuelCell;
+enum PickupType { Health = 0, Jetpack = 1 }
+var pickupType = PickupType.Health;
 var amount = 1;
 var sound : AudioClip;
 var soundVolume : float = 2.0;
-
 
 private var used = false;
 private var mover : DroppableMover;
@@ -14,7 +13,7 @@ function Start ()
 	mover = GetComponent(DroppableMover);
 }
 
-function ApplyPickup (playerStatus : ThirdPersonStatus)
+function ApplyPickup (playerStatus : PlayerStatus)
 {
 	// A switch...case statement may seem overkill for this, but it makes adding new pickup types trivial.
 	switch (pickupType)
@@ -23,8 +22,8 @@ function ApplyPickup (playerStatus : ThirdPersonStatus)
 			playerStatus.AddHealth(amount);
 			break;
 		
-		case PickupType.FuelCell:
-			playerStatus.FoundItem(amount);
+		case PickupType.Jetpack:
+			playerStatus.SetPowerup(Powerup.Jetpack);
 			break;
 	}
 	
@@ -33,7 +32,7 @@ function ApplyPickup (playerStatus : ThirdPersonStatus)
 
 function OnTriggerEnter (col : Collider) {
 	if(mover && mover.enabled) return;
-	var playerStatus : ThirdPersonStatus = col.GetComponent(ThirdPersonStatus);
+	var playerStatus : PlayerStatus = col.GetComponent(PlayerStatus);
 	
 	//* Make sure we are running into a player
 	//* prevent picking up the trigger twice, because destruction
@@ -49,20 +48,16 @@ function OnTriggerEnter (col : Collider) {
 	// Play sound
 	if (sound)
 		AudioSource.PlayClipAtPoint(sound, transform.position, soundVolume);
-		
-	
 	
 	// If there is an animation attached.
 	// Play it.
+	var destroyDelay : float = 0.0;
 	if (animation && animation.clip)
 	{
 		animation.Play();
-		Destroy(gameObject, animation.clip.length);
+		destroyDelay = animation.clip.length;
 	}
-	else
-	{
-		Destroy(gameObject);
-	}
+	Destroy(gameObject, destroyDelay);
 }
 
 // Auto setup the pickup

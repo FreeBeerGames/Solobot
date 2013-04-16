@@ -18,11 +18,11 @@ function Update ()
 	
 	if (Physics.Raycast(position, moveThisFrame, distanceThisFrame, collisionMask))
 	{
-		enabled = false;	
+		enabled = false;
 	}
 	else
 	{
 		position += moveThisFrame;
-		transform.position = Vector3(position.x, position.y + 0.75, position.z);	
+		transform.position = Vector3(position.x + 0.75, position.y + 0.75, position.z);
 	}
 }

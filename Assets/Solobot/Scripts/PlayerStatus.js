@@ -2,20 +2,36 @@
 
 // Keeps track of inventory, health, lives, etc.
 
-
-var health : int = 6;
-var maxHealth : int = 6;
-var lives = 4;
+public var health : int = 6;
+public var maxHealth : int = 6;
+public var lives = 4;
 
 // sound effects.
 
-var struckSound: AudioClip;
-var deathSound: AudioClip;
+public var struckSound: AudioClip;
+public var deathSound: AudioClip;
 
 private var levelStateMachine : LevelStatus;		// link to script that handles the level-complete sequence.
 
 private var remainingItems : int;	// total number to pick up on this level. Grabbed from LevelStatus.
 
+enum Powerup {None = 0, Jetpack = 1 }
+
+public var currentPowerup : Powerup = Powerup.None;
+
+function SetPowerup(newPowerup : Powerup) {
+	if (currentPowerup != newPowerup) {
+		DisableAllPowerups();
+		if (newPowerup == Powerup.Jetpack) SendMessage("EnableJetpack");
+		// else if other powerups here
+		
+		currentPowerup = newPowerup;
+	}
+}
+
+function DisableAllPowerups() {
+	SendMessage("DisableJetpack");
+}
 
 function Awake()
 {
@@ -100,8 +116,8 @@ function Die ()
 	// (NOTE: "HidePlayer" also disables the player controls.)
 	SendMessage("HidePlayer");
 	
-	var ssCamera : SideScrollCamera = Camera.main.GetComponent(SideScrollCamera);
-	ssCamera.SendMessage("Disable");
+	var sideScrollCam : SideScrollCamera = Camera.main.GetComponent(SideScrollCamera);
+	sideScrollCam.SendMessage("Disable");
 		
 	yield WaitForSeconds(1.6);	// give the sound time to complete.
 	
@@ -109,13 +125,8 @@ function Die ()
 	respawnPosition = Respawn.currentRespawn.transform.position;
 	
 	Camera.main.transform.position = respawnPosition - (transform.forward * 4) + Vector3.up;	// reset camera too
-	
-	ssCamera.SendMessage("Enable");
-	
-	// Relocate the player. We need to do this or the camera will keep trying to focus on the (invisible) player where he's standing on top of the FalloutDeath box collider.
+	sideScrollCam.SendMessage("Enable");
 	transform.position = respawnPosition + Vector3.up;
-	
-	SendMessage("ShowPlayer");	// Show the player again, ready for...	
-	// ... the respawn point to play it's particle effect
-	Respawn.currentRespawn.FireEffect ();
+	SendMessage("ShowPlayer");
+	Respawn.currentRespawn.FireEffect();
 }
