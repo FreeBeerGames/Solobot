@@ -1,26 +1,22 @@
 
-// The speed when walking
-var walkSpeed = 3.0;
-// after trotAfterSeconds of walking we trot with trotSpeed
-var trotSpeed = 4.0;
-// when pressing "Fire3" button (cmd) we start running
-var runSpeed = 6.0;
+/** Walk/Run Settings */
+public var walkSpeed = 3.0; /** Speed of normal initial walk */
+public var trotSpeed = 4.0; /** Speed when trotting, automatic */
+public var runSpeed = 6.0;	/** Speed when running, Input('Fire3') */
+var trotAfterSeconds = 3.0; /** Amount of time before walk->trot transisition */
 
-var inAirControlAcceleration = 3.0;
+/** Height of jump when pressing jump button and lettting go immediately */
+public var jumpHeight = 0.5;
 
-// How high do we jump when pressing jump and letting go immediately
-var jumpHeight = 0.5;
-// We add extraJumpHeight meters on top when holding the button down longer while jumping
-var extraJumpHeight = 2.5;
+/** Extra height when holding jump button, set to zero when jetpack enabled */
+public var extraJumpHeight = 2.5; 
 
 /** Gravity floating point settings */
 public var gravity : float = 20.0;
 public var controlledDescentGravity : float = 2.0;
 public var speedSmoothing : float = 10.0;
 public var rotateSpeed : float = 500.0;
-
-/** Transistions from states walk -> trot after this many seconds */
-var trotAfterSeconds = 3.0;
+public var inAirControlAcceleration = 3.0;
 
 /** Jumping flags */
 public var canJump : boolean = true;
@@ -32,9 +28,6 @@ private var jumpRepeatTime = 0.05;
 private var wallJumpTimeout = 0.15;
 private var jumpTimeout = 0.15;
 private var groundedTimeout = 0.25;
-
-// The camera doesnt start following the target immediately but waits for a split second to avoid too much waving around.
-private var lockCameraTimer = 0.0;
 
 // The current move direction in x-z
 private var moveDirection = Vector3.zero;
@@ -109,10 +102,14 @@ function ShowPlayer()
 
 function IsControllable() { return isControllable; }
 
+private var extraJumpHeightTemp : float = 0.0;
+
 function EnableJetpack() {
 	if (!IsJetpackEnabled()) {
 		hasJetpack = true;
 		canControlDescent = true;
+		extraJumpHeightTemp = extraJumpHeight;
+		extraJumpHeight = 0.0;
 		jumpHeight += jetpackJumpHeightBoost;
 	}
 }
@@ -121,6 +118,7 @@ function DisableJetpack() {
 	if (IsJetpackEnabled()) {
 		hasJetpack = false;
 		canControlDescent = false;
+		extraJumpHeight = extraJumpHeightTemp;
 		jumpHeight -= jetpackJumpHeightBoost;
 	}
 }
@@ -145,11 +143,6 @@ function UpdateSmoothedMovementDirection ()
 	else if (h > 0) targetDirection = Vector3(1,0,-transform.position.z);
 	
 	if(grounded || canChangeDirectionInAir) {
-		// Lock camera for short period when transitioning moving & standing still
-		lockCameraTimer += Time.deltaTime;
-		if (isMoving != wasMoving)
-			lockCameraTimer = 0.0;
-
 		// We store speed and direction seperately,
 		// so that when the character stands still we still have a valid forward direction
 		// moveDirection is always normalized, and we only update it if there is user input.
@@ -166,7 +159,7 @@ function UpdateSmoothedMovementDirection ()
 		var targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0);
 	
 		// Pick speed modifier
-		if (Input.GetButton ("Fire3"))
+		if (Input.GetButton ("Fire3") && grounded)
 		{
 			targetSpeed *= runSpeed;
 		}
@@ -186,21 +179,14 @@ function UpdateSmoothedMovementDirection ()
 			walkTimeStart = Time.time;
 	}
 	
-	if (!grounded) {
-		// Lock camera while in air
-		if (jumping)
-			lockCameraTimer = 0.0;
-
-		if (isMoving)
-			inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
-	}	
+	if (!grounded && isMoving)
+		inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
 }
 
 function ApplyWallJump ()
 {
 	// We must actually jump against a wall for this to work
-	if (!jumping)
-		return;
+	if (!jumping) return;
 
 	// Store when we first touched a wall during this jump
 	if (collisionFlags == CollisionFlags.CollidedSides)
@@ -426,12 +412,6 @@ function Slam (direction : Vector3)
 
 function GetDirection () {
 	return moveDirection;
-}
-
-
-function GetLockCameraTimer () 
-{
-	return lockCameraTimer;
 }
 
 function IsMoving ()  : boolean

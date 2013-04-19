@@ -122,8 +122,6 @@ function RotateTowardsPosition (targetPos : Vector3, rotateSpeed : float) : floa
 
 function Attack ()
 {
-	isAttacking = true;
-	
 	if (attackSound)
 	{
 		if (audio.clip != attackSound)
@@ -134,6 +132,8 @@ function Attack ()
 			audio.Play();
 		}
 	}
+
+	isAttacking = true;
 	
 	// Already queue up the attack run animation but set it's blend wieght to 0
 	// it gets blended in later
