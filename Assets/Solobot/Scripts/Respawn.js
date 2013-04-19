@@ -16,6 +16,7 @@ Respawn objects also require a simple collider, so the player can activate them.
 */
 
 public var initialRespawn : Respawn;	// set this to the initial respawn point for the level.
+public var finalRespawn : Respawn;
 
 /** Sound Effects Settings */
 var SFXPlayerRespawn: AudioClip;
@@ -79,6 +80,7 @@ function OnTriggerEnter(collider : Collider)
 			previously unactivated respawn point is activated by player contact */
 		currentRespawn = this;		
 		SetActive ();
+		if (currentRespawn == finalRespawn) Application.LoadLevel('YouWin');
 	}
 }
 
