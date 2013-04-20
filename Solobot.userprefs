@@ -2,16 +2,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\EnemyController.js">
     <Files>
-      <File FileName="Assets\Solobot\Scripts\GUI\MainMenu.js" Line="37" Column="3" />
+      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="1" Column="1" />
+      <File FileName="Assets\Solobot\Scripts\GUI\MainMenu.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Scripts\Enemies\EnemyDamage.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Player\JetPackParticleController.js" Line="1" Column="1" />
       <File FileName="Assets\Solobot\Scripts\DroppableMover.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="1" Column="1" />
       <File FileName="Assets\3D Platformer Tutorial\Player\ThirdPersonStatus.js" Line="1" Column="1" />
-      <File FileName="Assets\StarWarsText.js" Line="30" Column="21" />
+      <File FileName="Assets\StarWarsText.js" Line="1" Column="1" />
       <File FileName="Assets\Solobot\Scripts\PlayerStatus.js" Line="1" Column="1" />
-      <File FileName="Assets\GameOverText.js" Line="23" Column="37" />
-      <File FileName="Assets\Solobot\Scripts\Respawn.js" Line="83" Column="71" />
+      <File FileName="Assets\GameOverText.js" Line="1" Column="1" />
+      <File FileName="Assets\Solobot\Scripts\Respawn.js" Line="1" Column="1" />
       <File FileName="Assets\Solobot\Scripts\EnemyController.js" Line="193" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
