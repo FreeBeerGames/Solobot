@@ -2,7 +2,7 @@
 
 public var turretArmMoveSpeed : float = 10.0;
 public var weaponTransform : Transform;
-public var sightingDistance : float = 30.0;
+public var attackRadius : float = 30.0;
 public var projectile : Rigidbody;
 public var projectileSpeed : float = 8.0;
 
@@ -12,7 +12,7 @@ public var secondsBetweenProjectiles = 0.3;
 
 private var target : Transform;
 private var isFiring : boolean = false;
-private var targetDistance : float;
+private var targetDistance : float = 0.0;
 
 function Start () {
 	var player = GameObject.FindWithTag('Player');
@@ -28,8 +28,8 @@ function Start () {
 }
 
 function LateUpdate () {
-	targetDistance = weaponTransform.position.x - target.position.x;
-	if (targetDistance < sightingDistance && targetDistance > 0) {
+	var targetOffset = target.position - weaponTransform.position;
+	if (targetOffset.magnitude < attackRadius && targetOffset.y > -1.0 && targetOffset.x < 0) {
 		RotateTurretArms();
 		if (!isFiring) {
 			isFiring = true;
@@ -41,6 +41,10 @@ function LateUpdate () {
 			StopCoroutine("FireTurret");
 		}
 	}
+}
+
+function OperateArms() {
+
 }
 
 function RotateTurretArms() {
@@ -59,4 +63,9 @@ function FireTurret() {
 		}
 		yield WaitForSeconds(secondsBetweenBursts);
 	}
+}
+
+function OnDrawGizmosSelected () {
+	Gizmos.color = Color.red;
+	Gizmos.DrawWireSphere(transform.position, attackRadius);
 }

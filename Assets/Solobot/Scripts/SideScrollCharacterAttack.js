@@ -65,7 +65,7 @@ function DidShoot () {
 	var projectileClone : Rigidbody = Instantiate(projectile, transform.position + new Vector3(0,1,0) + transform.forward, transform.rotation);
 	projectileClone.velocity = transform.forward * projectileSpeed;
 	if (shootSound)
-		AudioSource.PlayClipAtPoint(shootSound, transform.position);
+		AudioSource.PlayClipAtPoint(shootSound, transform.position, 2.0);
 	busy = false;
 }
 
