@@ -24,6 +24,7 @@ public var canControlDescent : boolean = true;
 public var canWallJump : boolean = false;
 public var canChangeDirectionInAir : boolean = true;
 
+/** Private jumping logic constants */
 private var jumpRepeatTime = 0.05;
 private var wallJumpTimeout = 0.15;
 private var jumpTimeout = 0.15;
@@ -32,7 +33,7 @@ private var groundedTimeout = 0.25;
 // The current move direction in x-z
 private var moveDirection = Vector3.zero;
 // The current vertical speed
-private var verticalSpeed = 0.0;
+private var jumpSpeed = 0.0;
 // The current x-z move speed
 private var moveSpeed = 0.0;
 
@@ -43,15 +44,12 @@ private var collisionFlags : CollisionFlags;
 private var jumping = false;
 private var jumpingReachedApex = false;
 
-// Is the user pressing any keys?
-private var isMoving = false;
-// When did the user start walking (Used for going into trot after a while)
-private var walkTimeStart = 0.0;
-// Last time the jump button was clicked down
-private var lastJumpButtonTime = -10.0;
-// Last time we performed a jump
-private var lastJumpTime = -1.0;
-// Average normal of the last touched geometry
+/** Timer variables */
+private var walkTimeStart = 0.0; // Timer for going into 'trot' speed
+private var lastJumpButtonTime = -10.0; // Last time jump input pressed
+private var lastJumpTime = -1.0; // Last time we actually jumped
+
+/** Walljump normals */
 private var wallJumpContactNormal : Vector3;
 private var wallJumpContactNormalHeight : float;
 
@@ -65,12 +63,13 @@ private var inAirVelocity = Vector3.zero;
 
 private var lastGroundedTime = 0.0;
 
-private var lean = 0.0;
 private var slammed = false;
-
 private var isControllable = true;
+private var isMoving = false;
 
+/** Needed components of the game object cached on Awake. */
 private var meshRenderer : SkinnedMeshRenderer;
+private var characterController : CharacterController;
 
 /** Jetpack editor flag and private support variables */
 private var hasJetpack : boolean = false;
@@ -78,6 +77,7 @@ public var jetpackJumpHeightBoost : float = 5.0;
 
 function Awake ()
 {
+	characterController = GetComponent(CharacterController);
 	meshRenderer = GetComponentInChildren(SkinnedMeshRenderer);
 	moveDirection = transform.TransformDirection(Vector3.forward);
 }
@@ -131,50 +131,51 @@ function IsJetpackEnabled() {
 
 function UpdateSmoothedMovementDirection ()
 {
-	var grounded = IsGrounded();
 	var h = Input.GetAxisRaw("Horizontal");
 		
+	/** Depending on input on the Horizontal Axis, the target direction should
+	    be directly down the positive (facing forward) or negative (facing
+	    backwards) x-axis. By setting the rotation about the z-axis to be the
+	    opposite of the player's position offset on the z-axis from the z=0
+	    plane, we make it so that when the player veers off the z=0 plane he
+	    rotates more and more back to it. */
+	var targetDirection = Vector3.zero;
+	var hAxis = Input.GetAxisRaw("Horizontal");
+	if (hAxis < 0) targetDirection = Vector3(-1,0,-transform.position.z);
+	else if (hAxis > 0) targetDirection = Vector3(1,0,-transform.position.z);
+	
+	var grounded = IsGrounded();
 	var wasMoving = isMoving;
 	isMoving = Mathf.Abs (h) > 0.1;
-		
-	// Target direction is either positive or negative y axis in side scroller
-	var targetDirection = Vector3.zero;
-	if (h < 0) targetDirection = Vector3(-1,0,-transform.position.z);
-	else if (h > 0) targetDirection = Vector3(1,0,-transform.position.z);
 	
 	if(grounded || canChangeDirectionInAir) {
-		// We store speed and direction seperately,
-		// so that when the character stands still we still have a valid forward direction
-		// moveDirection is always normalized, and we only update it if there is user input.
+		/** Speed and direction stored separately so there is still a valid
+		    forward direction even when the player is standing still */
 		if (targetDirection != Vector3.zero)
-		{
 			moveDirection = targetDirection.normalized;
-		}
 		
-		// Smooth the speed based on the current target direction
+		/** We take into account different frame rates by multiplying by the
+		    time between frames */
 		var curSmooth = speedSmoothing * Time.deltaTime;
 		
-		// Choose target speed
-		//* We want to support analog input but make sure you cant walk faster diagonally than just forward or sideways
+		/** Support analog input, but ensure the player cannot walk faster
+		    diagonally rather than forward. */
 		var targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0);
 	
-		// Pick speed modifier
+		/** Modify our speed based on whether we are walking, 'trotting',
+		    or running. */
 		if (Input.GetButton ("Fire3") && grounded)
-		{
 			targetSpeed *= runSpeed;
-		}
 		else if (Time.time - trotAfterSeconds > walkTimeStart)
-		{
 			targetSpeed *= trotSpeed;
-		}
 		else
-		{
 			targetSpeed *= walkSpeed;
-		}
 		
+		/** Calculate our new move speed by linear interpolation, so we do not
+		    have rough jumps when it changes. */
 		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
 		
-		// Reset walk time start when we slow down
+		/** Reset the walk timer when the player slows down too much */
 		if (moveSpeed < walkSpeed * 0.3)
 			walkTimeStart = Time.time;
 	}
@@ -216,7 +217,7 @@ function ApplyWallJump ()
 		moveSpeed = 0;
 	}
 	
-	verticalSpeed = CalculateJumpVerticalSpeed (jumpHeight);
+	jumpSpeed = CalculateJumpVerticalSpeed (jumpHeight);
 	DidJump();
 	SendMessage("DidWallJump", null, SendMessageOptions.DontRequireReceiver);
 }
@@ -232,7 +233,7 @@ function ApplyJumping ()
 		// - Only when pressing the button down
 		// - With a timeout so you can press the button slightly before landing		
 		if (canJump && Time.time < lastJumpButtonTime + jumpTimeout) {
-			verticalSpeed = CalculateJumpVerticalSpeed (jumpHeight);
+			jumpSpeed = CalculateJumpVerticalSpeed (jumpHeight);
 			SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
 		}
 	}
@@ -247,10 +248,10 @@ function ApplyGravity ()
 		var jumpButton = Input.GetButton("Jump");
 		
 		// * When falling down we use controlledDescentGravity (only when holding down jump)
-		var controlledDescent = canControlDescent && verticalSpeed <= 0.0 && jumpButton && jumping;
+		var controlledDescent = canControlDescent && jumpSpeed <= 0.0 && jumpButton && jumping;
 		
 		// When we reach the apex of the jump we send out a message
-		if (jumping && !jumpingReachedApex && verticalSpeed <= 0.0)
+		if (jumping && !jumpingReachedApex && jumpSpeed <= 0.0)
 		{
 			jumpingReachedApex = true;
 			SendMessage("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
@@ -258,16 +259,16 @@ function ApplyGravity ()
 	
 		// * When jumping up we don't apply gravity for some time when the user is holding the jump button
 		//   This gives more control over jump height by pressing the button longer
-		var extraPowerJump =  IsJumping () && verticalSpeed > 0.0 && jumpButton && transform.position.y < lastJumpStartHeight + extraJumpHeight;
+		var extraPowerJump =  IsJumping () && jumpSpeed > 0.0 && jumpButton && transform.position.y < lastJumpStartHeight + extraJumpHeight;
 		
 		if (controlledDescent)			
-			verticalSpeed -= controlledDescentGravity * Time.deltaTime;
+			jumpSpeed -= controlledDescentGravity * Time.deltaTime;
 		else if (extraPowerJump)
 			return;
 		else if (IsGrounded ())
-			verticalSpeed = 0.0;
+			jumpSpeed = 0.0;
 		else
-			verticalSpeed -= gravity * Time.deltaTime;
+			jumpSpeed -= gravity * Time.deltaTime;
 	}
 }
 
@@ -298,44 +299,37 @@ function Update() {
 	/** Update the player's direction */
 	UpdateSmoothedMovementDirection();
 	
-	// Apply gravity
-	// - extra power jump modifies gravity
-	// - controlledDescent mode modifies gravity
+	/** Apply gravity and jumping logic */
 	ApplyGravity ();
-
-	// Perform a wall jump logic
-	// - Make sure we are jumping against wall etc.
-	// - Then apply jump in the right direction)
-	if (canWallJump)
-		ApplyWallJump();
-
-	/** Apply jumping logic every update based on last jump time */
+	if (canWallJump)ApplyWallJump();
 	ApplyJumping ();
 	
-	/** Use everything to calculate our final actual movement */
-	var movement = moveDirection * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+	/** Vertical speed stored as seperate vector. */
+	var verticalSpeed = Vector3(0, jumpSpeed, 0);
+	
+	/** Calculate our final movement vector and smooth it based
+	    on the framerate, (time between frames) */
+	var movement = moveDirection * moveSpeed + verticalSpeed + inAirVelocity;
 	movement *= Time.deltaTime;
 	
 	/** Pass newly calculated movement data to the character controller */
-	var controller : CharacterController = GetComponent(CharacterController);
 	wallJumpContactNormal = Vector3.zero;
-	collisionFlags = controller.Move(movement);
+	collisionFlags = characterController.Move(movement);
 	
-	/** Apply slamming from enemy melees */
 	if (IsGrounded())
 	{
-		if(slammed) // we got knocked over by an enemy. We need to reset some stuff
+		/** If we've been slammed, reset needed stats */
+		if(slammed)
 		{
 			slammed = false;
-			controller.height = 2;
+			characterController.height = 2;
 			transform.position.y += 0.75;
 		}
-		
 		transform.rotation = Quaternion.LookRotation(moveDirection);
-			
 	}	
 	else
 	{
+		/** Set the rotation of our transform */
 		if(!slammed)
 		{
 			var xzMove = movement;
@@ -382,29 +376,29 @@ function IsGrounded () {
 
 function SuperJump (height : float)
 {
-	verticalSpeed = CalculateJumpVerticalSpeed (height);
+	jumpSpeed = CalculateJumpVerticalSpeed (height);
 	collisionFlags = CollisionFlags.None;
 	SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
 }
 
 function SuperJump (height : float, jumpVelocity : Vector3)
 {
-	verticalSpeed = CalculateJumpVerticalSpeed (height);
+	jumpSpeed = CalculateJumpVerticalSpeed (height);
 	inAirVelocity = jumpVelocity;
 	
 	collisionFlags = CollisionFlags.None;
 	SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
 }
 
+/** Knocks the player back in response to an external force. */
 function Slam (direction : Vector3)
 {
-	verticalSpeed = CalculateJumpVerticalSpeed (1);
+	jumpSpeed = CalculateJumpVerticalSpeed (1);
 	inAirVelocity.x = direction.x * 6;
 	inAirVelocity.y = direction.y * 6;
 	direction.y = 1.5;
 	Quaternion.LookRotation(-direction);
-	var controller : CharacterController = GetComponent(CharacterController);
-	controller.height = 1.0;
+	characterController.height = 1.0;
 	slammed = true;
 	collisionFlags = CollisionFlags.None;
 	SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
@@ -416,7 +410,7 @@ function GetDirection () {
 
 function IsMoving ()  : boolean
 {
-	return Mathf.Abs(Input.GetAxisRaw("Vertical")) + Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5;
+	return Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5;
 }
 
 function HasJumpReachedApex ()
@@ -429,11 +423,10 @@ function IsGroundedWithTimeout ()
 	return lastGroundedTime + groundedTimeout > Time.time;
 }
 
+/** Limits controlled descent to only jumping */
 function IsControlledDescent ()
 {
-	// * When falling down we use controlledDescentGravity (only when holding down jump)
-	var jumpButton = Input.GetButton("Jump");
-	return canControlDescent && verticalSpeed <= 0.0 && jumpButton && jumping;
+	return Input.GetButton("Jump") && canControlDescent && jumpSpeed <= 0.0 && jumping;
 }
 
 function Reset ()

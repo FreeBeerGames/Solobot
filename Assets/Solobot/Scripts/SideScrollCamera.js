@@ -2,10 +2,15 @@ var target : Transform;
 
 var xOffset : float;
 var yOffset : float;
-
 var distance : float;
-
 var isEnabled : boolean = true;
+
+var targetController : SideScrollController;
+
+function Start() {
+	targetController = target.GetComponent(SideScrollController);
+	if (!targetController) Debug.Log('Target must have SideScrollController component');
+}
 
 function Disable() {
 	isEnabled = false;
