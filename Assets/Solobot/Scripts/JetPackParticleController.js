@@ -32,32 +32,27 @@ function Start () {
 	}
 	childLight.enabled = false;
 
-	// Once every frame  update particle emission and lights
+	// Once every frame update particle emission and lights
 	while (true)
 	{
-		if (playerController.IsJetpackEnabled()) {
-			isJetpackActive = playerController.IsJumping();
-			if (isJetpackActive)
-			{
-				if (!audio.isPlaying)
-				{
-					audio.Play();
-				}
-				litAmount = Mathf.Clamp(litAmount + Time.deltaTime * 2, minIntensity, maxIntensity);
-			}
-			else
-			{
-				audio.Stop();
-				litAmount = Mathf.Clamp(litAmount - Time.deltaTime * 2, minIntensity, maxIntensity);
-			}
-			for (var p : ParticleEmitter in particles)
-			{
-				p.emit = isJetpackActive;
-			}
-				
-			childLight.enabled = isJetpackActive;
-			childLight.intensity = litAmount;
+		isJetpackActive = playerController.IsJetpackActive();
+		if (isJetpackActive)
+		{
+			if (!audio.isPlaying) audio.Play();
+			litAmount = Mathf.Clamp(litAmount + Time.deltaTime * 2, minIntensity, maxIntensity);
 		}
+		else
+		{
+			audio.Stop();
+			litAmount = Mathf.Clamp(litAmount - Time.deltaTime * 2, minIntensity, maxIntensity);
+		}
+		for (var p : ParticleEmitter in particles)
+		{
+			p.emit = isJetpackActive;
+		}
+			
+		childLight.enabled = isJetpackActive;
+		childLight.intensity = litAmount;
 		yield;
 	}
 	audio.clip = null;

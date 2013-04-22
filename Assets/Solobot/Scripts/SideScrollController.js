@@ -49,18 +49,12 @@ private var walkTimeStart = 0.0; // Timer for going into 'trot' speed
 private var lastJumpButtonTime = -10.0; // Last time jump input pressed
 private var lastJumpTime = -1.0; // Last time we actually jumped
 
-/** Walljump normals */
 private var wallJumpContactNormal : Vector3;
 private var wallJumpContactNormalHeight : float;
-
-// the height we jumped from (Used to determine for how long to apply extra jump power after jumping.)
-private var lastJumpStartHeight = 0.0;
-
-// When did we touch the wall the first time during this jump (Used for wall jumping)
-private var touchWallJumpTime = -1.0;
+private var lastJumpStartHeight = 0.0; // Height at which last jump began
+private var touchWallJumpTime = -1.0; // Time first touched wall during jump
 
 private var inAirVelocity = Vector3.zero;
-
 private var lastGroundedTime = 0.0;
 
 private var slammed = false;
@@ -71,33 +65,34 @@ private var isMoving = false;
 private var meshRenderer : SkinnedMeshRenderer;
 private var characterController : CharacterController;
 
-/** Jetpack editor flag and private support variables */
-private var hasJetpack : boolean = false;
 public var jetpackJumpHeightBoost : float = 5.0;
+private var jetpackEnabled : boolean = false;
+private var forceFieldController : ForceFieldController;
+
+private var playerStatus : PlayerStatus;
 
 function Awake ()
 {
 	characterController = GetComponent(CharacterController);
 	meshRenderer = GetComponentInChildren(SkinnedMeshRenderer);
 	moveDirection = transform.TransformDirection(Vector3.forward);
+	
+	playerStatus = GetComponent(PlayerStatus);
+	
+	var forceField = GameObject.FindGameObjectWithTag('Force Field');
+	forceFieldController = forceField.GetComponent(ForceFieldController);
 }
 
-// This next function responds to the "HidePlayer" message by hiding the player. 
-// The message is also 'replied to' by identically-named functions in the collision-handling scripts.
-// - Used by the LevelStatus script when the level completed animation is triggered.
 function HidePlayer()
 {
 	meshRenderer.enabled = false;
 	isControllable = false;
 }
 
-
-// This is a complementary function to the above. We don't use it in the tutorial, but it's included for
-// the sake of completeness. (I like orthogonal APIs; so sue me!)
 function ShowPlayer()
 {
-	meshRenderer.enabled = true; // start rendering the player again.
-	isControllable = true;	// allow player to control the character again.
+	meshRenderer.enabled = true;
+	isControllable = true;
 }
 
 function IsControllable() { return isControllable; }
@@ -105,34 +100,26 @@ function IsControllable() { return isControllable; }
 private var extraJumpHeightTemp : float = 0.0;
 
 function EnableJetpack() {
-	if (!IsJetpackEnabled()) {
-		hasJetpack = true;
-		canControlDescent = true;
-		extraJumpHeightTemp = extraJumpHeight;
-		extraJumpHeight = 0.0;
-		jumpHeight += jetpackJumpHeightBoost;
-	}
+	canControlDescent = true;
+	extraJumpHeightTemp = extraJumpHeight;
+	extraJumpHeight = 0.0;
+	jumpHeight += jetpackJumpHeightBoost;
+	jetpackEnabled = true;
 }
 
 function DisableJetpack() {
-	if (IsJetpackEnabled()) {
-		hasJetpack = false;
-		canControlDescent = false;
-		extraJumpHeight = extraJumpHeightTemp;
-		jumpHeight -= jetpackJumpHeightBoost;
-	}
+	canControlDescent = false;
+	extraJumpHeight = extraJumpHeightTemp;
+	jumpHeight -= jetpackJumpHeightBoost;
+	jetpackEnabled = false;
 }
 
+function IsJetpackEnabled() { return jetpackEnabled; }
 
-function IsJetpackEnabled() {
-	return hasJetpack;
-}
-
+function IsJetpackActive() { return jetpackEnabled && IsJumping(); }
 
 function UpdateSmoothedMovementDirection ()
-{
-	var h = Input.GetAxisRaw("Horizontal");
-		
+{		
 	/** Depending on input on the Horizontal Axis, the target direction should
 	    be directly down the positive (facing forward) or negative (facing
 	    backwards) x-axis. By setting the rotation about the z-axis to be the
@@ -146,7 +133,7 @@ function UpdateSmoothedMovementDirection ()
 	
 	var grounded = IsGrounded();
 	var wasMoving = isMoving;
-	isMoving = Mathf.Abs (h) > 0.1;
+	isMoving = Mathf.Abs (hAxis) > 0.1;
 	
 	if(grounded || canChangeDirectionInAir) {
 		/** Speed and direction stored separately so there is still a valid
@@ -350,6 +337,20 @@ function Update() {
 		{
 			jumping = false;
 			SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
+		}
+	}
+	
+	if (Input.GetButtonDown('Powerup')) {
+		var currentPowerup : Powerup = playerStatus.GetCurrentPowerup();
+		
+		if (currentPowerup == Powerup.Jetpack) {
+			if (!jetpackEnabled) EnableJetpack();
+			else DisableJetpack();
+		}
+		else if (currentPowerup == Powerup.ForceField) {
+			if (forceFieldController) {
+				forceFieldController.SendMessage('Activate');
+			}
 		}
 	}
 }

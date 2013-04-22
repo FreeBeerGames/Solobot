@@ -1,19 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\GUI\StarWarsText.js">
-    <Files>
-      <File FileName="Assets\Solobot\Scripts\TurretController.js" Line="56" Column="24" />
-      <File FileName="Assets\Solobot\Scripts\GUI\MainMenu.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\DroppableMover.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="308" Column="47" />
-      <File FileName="Assets\Solobot\Scripts\PlayerStatus.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\Respawn.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\EnemyController.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="25" Column="4" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollCamera.js" Line="17" Column="2" />
-      <File FileName="Assets\Solobot\Scripts\GUI\StarWarsText.js" Line="13" Column="78" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -66,7 +66,7 @@ function OnTriggerEnter(collider : Collider)
 {	/** Only detect collisions on the static 'current' respawn prefab, and only from GameObjects with the
 	    'Player' tag. Built-in and self-defined object level tags for quick object lookup is more efficient
 	    than other methods available such as GameObject.Find(string), which is much slower. */
-	if (currentRespawn != this && collider.gameObject.CompareTag('Player'))
+	if (currentRespawn != this && collider && collider.gameObject.CompareTag('Player'))
 	{
 		/** Set the curret respawn inactive so the new respawn point can be activated */
 		currentRespawn.SetInactive ();
