@@ -3,8 +3,9 @@
 // Keeps track of inventory, health, lives, etc.
 
 public var health : int = 6;
-public var maxHealth : int = 6;
+private var maximumHealth : int;
 public var lives = 4;
+private var maximumLives : int;
 
 // sound effects.
 
@@ -34,6 +35,8 @@ function Awake()
 		Debug.Log("No link to Level Status");
 	
 	remainingItems = levelStateMachine.itemsNeeded;
+	maximumHealth = health;
+	maximumLives = lives;
 }
 
 // Utility function used by HUD script:
@@ -41,6 +44,9 @@ function GetRemainingItems() : int
 {
 	return remainingItems;
 }
+
+function GetMaxLives() { return maximumLives; }
+function GetMaxHealth() { return maximumHealth; }
 
 function ApplyDamage (damage : int)
 {
@@ -58,17 +64,14 @@ function ApplyDamage (damage : int)
 function AddLife (powerUp : int)
 {
 	lives += powerUp;
-	health = maxHealth;
+	maximumLives += powerUp;
+	health = maximumHealth;
 }
 
 function AddHealth (powerUp : int)
 {
 	health += powerUp;
-	
-	if (health>maxHealth)		// We can only show six segments in our HUD.
-	{
-		health=maxHealth;	
-	}		
+	maximumHealth += powerUp;
 }
 
 
@@ -100,7 +103,7 @@ function Die ()
 	}
 		
 	lives--;
-	health = maxHealth;
+	health = maximumHealth;
 	
 	if(lives < 0)
 		Application.LoadLevel("GameOver");	

@@ -63,11 +63,12 @@ function Die ()
 		var dropped : DroppableMover;
 
 		// select a pickup type at random
-		if (Random.value > 1 - dropPercentage)
+		if (Random.value > 1 - dropPercentage) {
 			dropped = Instantiate(dropPrefab, dropPosition, Quaternion.identity);
 
-		// set the pickup in motion
-		dropped.Bounce(direction * 4 * (Random.value + 0.2));
+			// set the pickup in motion
+			dropped.Bounce(direction * 4 * (Random.value + 0.2));
+		}
 	}
 }
 

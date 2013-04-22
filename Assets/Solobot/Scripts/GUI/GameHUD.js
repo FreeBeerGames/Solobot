@@ -1,6 +1,7 @@
 // GameHUD: Platformer Tutorial Master GUI script.
 
-public var guiSkin: GUISkin;
+public var guiSkin : GUISkin;
+public var guiFont : Font;
 public var nativeVerticalResolution : float = 1200.0;
 
 public var PowerupNone : Texture2D;
@@ -19,10 +20,13 @@ private var PowerupJetpackDisabledIcon : GUIContent;
 private var PowerupForceFieldIcon : GUIContent;
 private var PowerupForceFieldCooldownIcon : GUIContent;
 
+private var pauseMenuActive : boolean = false;
+
 /** Cache links to player controller and status in order to
     display information on the HUD */
 function Awake()
 {
+
 	var player = GameObject.FindWithTag('Player');
 	playerStatus = player.GetComponent(PlayerStatus);
 	playerController = player.GetComponent(SideScrollController);
@@ -45,8 +49,15 @@ function Awake()
 
 function OnGUI ()
 {
-	var powerupLabel : String = '';
+
+	if (guiSkin) GUI.skin = guiSkin;
+	if (guiFont) {
+		GUI.skin.font = guiFont;
+		GUI.skin.label.font = guiFont;
+	}
+	GUI.skin.label.fontSize = 14;
 	
+	var powerupLabel : String = '';
 	var currentPowerup : Powerup = playerStatus.GetCurrentPowerup();
 	var powerupIcon : GUIContent;
 	if (currentPowerup == Powerup.None) {
@@ -73,43 +84,46 @@ function OnGUI ()
 			powerupLabel = 'Force Field\n(Cooldown)';
 		}
 	}
-
-	GUI.backgroundColor = Color.red;
-	GUI.Box (Rect (10, 10, 220, 40), "Health: " + playerStatus.health + "/" + playerStatus.maxHealth);
-	
-	GUI.backgroundColor = Color.green;
-	GUI.HorizontalScrollbar(Rect(20, 30, 200, 20), 0, playerStatus.health, 0, playerStatus.maxHealth);
 	
 	GUI.Box(Rect(Screen.width - 120, 20, 100, 100), powerupIcon);
 	GUI.Box(Rect(Screen.width - 120, 125, 100, 40), powerupLabel);
+	
+	if (pauseMenuActive) {
+		GUI.Box(Rect(Screen.width / 2 - 50, Screen.height / 2 - 40, 100, 80), '');
+		if (GUI.Button(Rect(Screen.width / 2 - 40, Screen.height / 2 - 25, 80, 20), 'Main Menu')) {
+			TogglePauseMenu();
+			Application.LoadLevel('MainMenu');
+		}
+		if (GUI.Button(Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 80, 20), 'Quit Game')) {
+			TogglePauseMenu();
+			Application.Quit();
+		}
+	}
+	
+	GUI.Box(Rect(10, 10, 220, 90), '');
+	GUI.backgroundColor = Color.green;
+	GUI.Label (Rect (92, 10, 220, 90), "Health: " + playerStatus.health + "/" + playerStatus.GetMaxHealth());
+	GUI.HorizontalScrollbar(Rect(20, 30, 200, 20), 0, playerStatus.health, 0, playerStatus.GetMaxHealth());
+	GUI.Label (Rect (96, 50, 220, 40), "Lives: " + playerStatus.lives + "/" + playerStatus.GetMaxLives());
+	GUI.HorizontalScrollbar(Rect(20, 70, 200, 20), 0, playerStatus.lives, 0, playerStatus.GetMaxLives());
 	
 	GUI.matrix = Matrix4x4.TRS (Vector3.zero,
 								Quaternion.identity,
 								Vector3 (Screen.height / nativeVerticalResolution,
 								Screen.height / nativeVerticalResolution,
 								1));
-								
-	if (guiSkin) GUI.skin = guiSkin;
 }
 
-function DrawImageBottomAligned (pos : Vector2, image : Texture2D)
-{
-	GUI.Label(Rect (pos.x, nativeVerticalResolution - image.height - pos.y, image.width, image.height), image);
+function Update() {
+	if (Input.GetButtonDown('Pause')) TogglePauseMenu();
 }
 
-function DrawLabelBottomAligned (pos : Vector2, text : String)
-{
-	GUI.Label(Rect (pos.x, nativeVerticalResolution - pos.y, 100, 100), text);
-}
-
-function DrawImageBottomRightAligned (pos : Vector2, image : Texture2D)
-{
-	var scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-	GUI.Label(Rect (scaledResolutionWidth - pos.x - image.width, nativeVerticalResolution - image.height - pos.y, image.width, image.height), image);
-}
-
-function DrawLabelBottomRightAligned (pos : Vector2, text : String)
-{
-	var scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-	GUI.Label(Rect (scaledResolutionWidth - pos.x, nativeVerticalResolution - pos.y, 100, 100), text);
+function TogglePauseMenu () {
+	if (!pauseMenuActive) {
+		Time.timeScale = 0;
+		pauseMenuActive = true;
+	} else {
+		Time.timeScale = 1;
+		pauseMenuActive = false;
+	}
 }
