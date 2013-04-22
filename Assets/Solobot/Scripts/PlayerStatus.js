@@ -15,23 +15,17 @@ private var levelStateMachine : LevelStatus;		// link to script that handles the
 
 private var remainingItems : int;	// total number to pick up on this level. Grabbed from LevelStatus.
 
-enum Powerup {None = 0, Jetpack = 1 }
+enum Powerup {None = 0, Jetpack = 1, ForceField = 2}
 
 public var currentPowerup : Powerup = Powerup.None;
 
 function SetPowerup(newPowerup : Powerup) {
 	if (currentPowerup != newPowerup) {
-		DisableAllPowerups();
-		if (newPowerup == Powerup.Jetpack) SendMessage("EnableJetpack");
-		// else if other powerups here
-		
 		currentPowerup = newPowerup;
 	}
 }
 
-function DisableAllPowerups() {
-	SendMessage("DisableJetpack");
-}
+function GetCurrentPowerup () { return currentPowerup; }
 
 function Awake()
 {

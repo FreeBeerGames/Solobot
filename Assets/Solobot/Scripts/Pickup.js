@@ -1,4 +1,4 @@
-enum PickupType { Health = 0, Jetpack = 1 }
+enum PickupType { Health = 0, Jetpack = 1, ForceField = 2}
 var pickupType = PickupType.Health;
 var amount = 1;
 var sound : AudioClip;
@@ -24,6 +24,10 @@ function ApplyPickup (playerStatus : PlayerStatus)
 		
 		case PickupType.Jetpack:
 			playerStatus.SetPowerup(Powerup.Jetpack);
+			break;
+		
+		case PickupType.ForceField:
+			playerStatus.SetPowerup(Powerup.ForceField);
 			break;
 	}
 	
