@@ -1,20 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Solobot\Scripts\GUI\GameHUD.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerStatus.js">
     <Files>
-      <File FileName="Assets\Solobot\Scripts\PlayerStatus.js" Line="61" Column="2" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollController.js" Line="349" Column="4" />
-      <File FileName="Assets\Solobot\Scripts\Pickup.js" Line="26" Column="45" />
-      <File FileName="Assets\Solobot\Scripts\TurretController.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\GUI\MainMenu.js" Line="109" Column="21" />
-      <File FileName="Assets\Solobot\Scripts\DroppableMover.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\Respawn.js" Line="87" Column="60" />
-      <File FileName="Assets\Solobot\Scripts\EnemyController.js" Line="1" Column="1" />
-      <File FileName="Assets\Solobot\Scripts\SideScrollCharacterAttack.js" Line="1" Column="1" />
-      <File FileName="Assets\ForceFieldController.js" Line="37" Column="66" />
-      <File FileName="Assets\Solobot\Scripts\EnemyDamage.js" Line="67" Column="64" />
-      <File FileName="Assets\Solobot\Scripts\GUI\GameHUD.js" Line="89" Column="47" />
-      <File FileName="Assets\Solobot\Scripts\JetPackParticleController.js" Line="34" Column="1" />
+      <File FileName="Assets\Scripts\Player\SideScrollController.js" Line="354" Column="48" />
+      <File FileName="Assets\Scripts\Player\PlayerStatus.js" Line="14" Column="1" />
+      <File FileName="Assets\Scripts\Player\ForceFieldController.js" Line="75" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
