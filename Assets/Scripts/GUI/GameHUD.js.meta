@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7b098b5b9704f146ad0f7f9955ef961
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - guiSkin: {instanceID: 0}
+  - guiFont: {fileID: 12800000, guid: 7372d35d8fd463c4d8c7a50e445203c4, type: 3}
+  - PowerupNone: {instanceID: 0}
+  - PowerupJetpack: {instanceID: 0}
+  - PowerupJetpackDisabled: {instanceID: 0}
+  - PowerupForceField: {instanceID: 0}
+  - PowerupForceFieldCooldown: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

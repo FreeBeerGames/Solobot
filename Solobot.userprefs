@@ -1,6 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerStatus.js">
+    <Files>
+      <File FileName="Assets\Scripts\Player\SideScrollController.js" Line="354" Column="48" />
+      <File FileName="Assets\Scripts\Player\PlayerStatus.js" Line="14" Column="1" />
+      <File FileName="Assets\Scripts\Player\ForceFieldController.js" Line="75" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
