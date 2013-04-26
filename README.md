@@ -42,7 +42,7 @@ The game will feature 3D models and graphics, but all the action takes place in 
 * **P1** -- [**Game Proposal**][1] - [**Design Sketch 1**][2] - [**Design Sketch 2**][3]
 * **P2** -- [**Design Specification** - **Interim Report**][5]
 * **P3** -- [**Progress Report** - **Minimum Target**][6]
-* **P4** -- Alpha Release
+* **P4** -- [**Alpha Release**][7]
 * **P5** -- Play Testing; Final Paper
 
 ## Demo Executables
