@@ -39,11 +39,11 @@ The game will feature 3D models and graphics, but all the action takes place in 
 
 ## Deliverables
 
-* **Part I** -- [Game Proposal][1]; [Design Sketch 1][2]; [Design Sketch 2][3]
-* **Part II** -- Design Specification; Interim Report
-* **Part III** -- Progress Report
-* **Part IV** -- Alpha Release
-* **Part V** -- Play Testing; Final Paper
+* **P1** -- [Game Proposal][1] - [Design Sketch 1][2] - [Design Sketch 2][3]
+* **P2** -- [Design Specification - Interim Report][5]
+* **P3** -- [Progress Report - Minimum Target][6]
+* **P4** -- Alpha Release
+* **P5** -- Play Testing; Final Paper
 
 ## Demo Executables
 * Coming soon
@@ -55,3 +55,5 @@ The game will feature 3D models and graphics, but all the action takes place in 
 [2]: Docs/design_sketch_1.jpg
 [3]: Docs/design_sketch_2.jpg
 [4]: Docs/gitbuilding.md
+[5]: Docs/interim.md
+[6]: Docs/mintarget.md
