@@ -1,10 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerStatus.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUI\GameHUD.js">
     <Files>
-      <File FileName="Assets\Scripts\Player\SideScrollController.js" Line="354" Column="48" />
-      <File FileName="Assets\Scripts\Player\PlayerStatus.js" Line="14" Column="1" />
-      <File FileName="Assets\Scripts\Player\ForceFieldController.js" Line="75" Column="2" />
+      <File FileName="Assets\Scripts\GUI\GameHUD.js" Line="133" Column="1" />
+      <File FileName="Assets\Scripts\Player\SideScrollController.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\PlayerStatus.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\ForceFieldController.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUI\MainMenu.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -22,6 +22,7 @@ private var PowerupForceFieldCooldownIcon : GUIContent;
 
 private var pauseMenuActive : boolean = false;
 
+
 /** Cache links to player controller and status in order to
     display information on the HUD */
 function Awake()
@@ -94,9 +95,26 @@ function OnGUI ()
 			TogglePauseMenu();
 			Application.LoadLevel('MainMenu');
 		}
-		if (GUI.Button(Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 80, 20), 'Quit Game')) {
-			TogglePauseMenu();
-			Application.Quit();
+		
+		var secondButtonLabel = 'Quit Game';
+		
+		var ap = Application.platform;
+		var wwp = RuntimePlatform.WindowsWebPlayer;
+		var osxwp = RuntimePlatform.OSXWebPlayer;
+		var we = RuntimePlatform.WindowsEditor;
+		var osxe = RuntimePlatform.OSXEditor;
+		
+		var fullscreenOption = false;
+		if (ap == wwp || ap == osxwp || ap == we || ap == osxe) fullscreenOption = true;
+		if (fullscreenOption) secondButtonLabel = 'Fullscreen';
+		if (GUI.Button(Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 80, 20), secondButtonLabel)) {
+			if (fullscreenOption) {
+				ToggleFullscreen();
+				TogglePauseMenu();
+			} else {				
+				TogglePauseMenu();
+				Application.Quit();
+			}
 		}
 	}
 	
@@ -112,6 +130,10 @@ function OnGUI ()
 								Vector3 (Screen.height / nativeVerticalResolution,
 								Screen.height / nativeVerticalResolution,
 								1));
+}
+
+function ToggleFullscreen() {
+	Screen.fullScreen = !Screen.fullScreen;
 }
 
 function Update() {
