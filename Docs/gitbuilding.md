@@ -11,7 +11,7 @@ the Github organization then please let [email me](cmg0030@auburn.edu) and let
 me know so I can give you pull rights for the repo.
 
 The Solobot development repo can be found at [**FreeBeerGames/Solobot**][3]. 
-The GitHub repo home page render the GitHub Flavored Markdown (GFM) in the 
+The GitHub repo home page renders the GitHub Flavored Markdown (GFM) in the 
 [**README.md file**][4]. This markdown language is very convienient and can
 result in very simplified HTML documentation. The same README.md file is used
 on the GitHub Project Page hosted at 
@@ -22,7 +22,7 @@ actually part of our open source repo.
 ## Git Workflow Overview
 
 Git is a source/version control system which can be downloaded from its
-[**official page][6]. The Unity IDE is *not* available for Linux, so we will
+[**official page**][6]. The Unity IDE is *not* available for Linux, so we will
 need to develop using Windows. So go ahead and download the latest stable
 Windows release of the Git utility. The Git utility is your client, you can
 run it from the Windows command line with the command `git`. There is a
@@ -80,7 +80,7 @@ associated with the local repo:
 The last command should give you an output of:
 
     origin
-	upstream
+    upstream
 
 This indicates that you have two remote repositories associated with the
 current local repository. The original repository you cloned from. That is
@@ -94,8 +94,8 @@ In order to commit changes that you've made locally to your remote fork of the
 project you should issue the following series of commands:
 
     git add .
-	git commit -a -m "Commit message/what you changed goes here"
-	git push origin master
+    git commit -a -m "Commit message/what you changed goes here"
+    git push origin master
 
 At this point you will have uploaded your changes to your remote fork of the
 project. In order to get your changes merged back into the project you
