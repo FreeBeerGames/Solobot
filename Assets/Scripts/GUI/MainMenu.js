@@ -86,6 +86,11 @@ function OnGUI () {
 		if (GUI.Button(Rect(Screen.width / 2 - 50, 301, 100, 40), 'Exit')) {
 			OnExitButtonPressed();
 		}
+	} else {
+		GUI.SetNextControlName('Fullscreen');
+		if (GUI.Button(Rect(Screen.width / 2 - 50, 301, 100, 40), 'Fullscreen')) {
+			ToggleFullscreen();
+		}
 	}
 	
 	GUI.FocusControl(menuItems[selectionInput]);
@@ -100,6 +105,9 @@ function OnGUI () {
 	}
 }
 
+function ToggleFullscreen() {
+	Screen.fullScreen = !Screen.fullScreen;
+}
 
 function OnStartButtonPressed() {
 	Application.LoadLevel('DemoLevel');
