@@ -110,6 +110,7 @@ function OnGUI ()
 		if (GUI.Button(Rect(Screen.width / 2 - 40, Screen.height / 2 + 5, 80, 20), secondButtonLabel)) {
 			if (fullscreenOption) {
 				ToggleFullscreen();
+				TogglePauseMenu();
 			} else {				
 				TogglePauseMenu();
 				Application.Quit();
