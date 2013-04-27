@@ -1,5 +1,10 @@
 # Interim Report
 
+## State of the Game
+
+The current state of our game has reached our goals for layer 1. We have a working prototype game with a player character that can move around a simple level and perform basic actions like jumping and attacking. The player currently interacts properly with the environment and collides with geometry.  The controls the user can utilize to interact with the game are easily changeable and will be merged with our current design for controls very soon. The Unity engine has provided a lot of help for us in several aspects of the game. The built in PhysX engine that Unity includes has been working very well for us and has made the character interactions with the world a lot easier than we had originally planned. The art assets have been more difficult than we originally thought, because getting everything to look fluid has been very difficult. Our current prototype is still using built in assets to keep everything working.
+
+
 ## Power-Ups
 
 - **Static Field**
