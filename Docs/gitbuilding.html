@@ -37,14 +37,11 @@
           <span class="credits left">Project maintained by <a href="https://github.com/CoryG89">CoryG89</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
         </div>
+<h1>Solobot Project - Build Instructions - Git Guide/Workflow</h1>
 
-<h1>
-<a name="solobot-project---build-instructions---git-guideworkflow" class="anchor" href="#solobot-project---build-instructions---git-guideworkflow"><span class="mini-icon mini-icon-link"></span></a>Solobot Project - Build Instructions - Git Guide/Workflow</h1>
+<p><br /></p>
 
-<p><br></p>
-
-<h2>
-<a name="abstract" class="anchor" href="#abstract"><span class="mini-icon mini-icon-link"></span></a>Abstract</h2>
+<h2>Abstract</h2>
 
 <p>The source code and workflow will be controlled by Git, written by Linux 
 developer Linus Torvalds, and hosted on the free for open source Git hosting 
@@ -54,7 +51,7 @@ the Github organization then please let <a href="cmg0030@auburn.edu">email me</a
 me know so I can give you pull rights for the repo.</p>
 
 <p>The Solobot development repo can be found at <a href="http://github.com/FreeBeerGames/Solobot/"><strong>FreeBeerGames/Solobot</strong></a>. 
-The GitHub repo home page render the GitHub Flavored Markdown (GFM) in the 
+The GitHub repo home page renders the GitHub Flavored Markdown (GFM) in the 
 <a href="https://raw.github.com/FreeBeerGames/Solobot/master/README.md"><strong>README.md file</strong></a>. This markdown language is very convienient and can
 result in very simplified HTML documentation. The same README.md file is used
 on the GitHub Project Page hosted at 
@@ -62,11 +59,10 @@ on the GitHub Project Page hosted at
 simply the gh-pages branch of our repo, we can update it as needed and is
 actually part of our open source repo.</p>
 
-<h2>
-<a name="git-workflow-overview" class="anchor" href="#git-workflow-overview"><span class="mini-icon mini-icon-link"></span></a>Git Workflow Overview</h2>
+<h2>Git Workflow Overview</h2>
 
 <p>Git is a source/version control system which can be downloaded from its
-<a href="http://git-scm.com/">**official page</a>. The Unity IDE is <em>not</em> available for Linux, so we will
+<a href="http://git-scm.com/"><strong>official page</strong></a>. The Unity IDE is <em>not</em> available for Linux, so we will
 need to develop using Windows. So go ahead and download the latest stable
 Windows release of the Git utility. The Git utility is your client, you can
 run it from the Windows command line with the command <code>git</code>. There is a
@@ -83,8 +79,7 @@ download it. Using a Git workflow, we will all be able to have our own
 development environment, and hopefully everyone will be able to contribute to
 the project via Git.</p>
 
-<h2>
-<a name="forks-vs-clones-the-movie" class="anchor" href="#forks-vs-clones-the-movie"><span class="mini-icon mini-icon-link"></span></a>Forks vs. Clones (The Movie)</h2>
+<h2>Forks vs. Clones (The Movie)</h2>
 
 <p>Okay, so most people don't realize this, but forking is actually <em>not</em> 
 something that is defined by the Git protocol, and it is added functionality
@@ -99,12 +94,24 @@ account from the remote repository you are forking.</p>
 <p>So in the context of our project what I would recommend doing is forking the
 repository on GitHub, (top right of the repo page). Then on your clone your
 own fork locally using the <strong>Clone in Windows</strong> button. At this point the
-Github Windows client should have popped up and downloaded the remote repo.
-You should now right click the repository in the Github client and click
+Github Windows client should have popped up and downloaded the remote repo.</p>
+
+<p>Even if you do not want to use the GitHub for Windows GUI, I recommend that
+you download it anyway because it comes with Git Shell, which is a command
+line shell which allows you to use Linux commands and directory structure
+on Windows. Regardless of what you use, if you have git installed, after
+you have forked the main repo <a href="http://github.com/FreeBeerGames/Solobot/"><strong>FreeBeerGames/Solobot</strong></a> you can run
+the following command in order to clone the repo to the current working
+directory.</p>
+
+<pre><code>git clone https://github.com/FreeBeerGames/Solobot.git
+</code></pre>
+
+<p>You should now right click the repository in the Github client and click
 <strong>Open Shell Here</strong> and setup our upstream remote repository. You can
 do this by issuing the following command:</p>
 
-<pre><code>git add remote upstream git://github.com/FreeBeerGames/Solobot.git
+<pre><code>git remote add upstream https://github.com/FreeBeerGames/Solobot.git
 </code></pre>
 
 <p>You can then run the following command to view all the remote repositories
@@ -122,7 +129,7 @@ upstream
 <p>This indicates that you have two remote repositories associated with the
 current local repository. The original repository you cloned from. That is
 your fork unique to your GitHub account. The other remote repository is the
-upstream repository located at <strong>FreeBeerGames/Solobot</strong>. If you run the
+upstream repository located at <a href="http://github.com/FreeBeerGames/Solobot/"><strong>FreeBeerGames/Solobot</strong></a>. If you run the
 following command with the verbose flag you will see that you have both
 fetch and push rights for your origin repository, however you may only fetch
 from the upstream repo.</p>
@@ -152,6 +159,7 @@ git push origin master
 </code></pre>
 
 <p>You may then complete your pull request.</p>
+
 
       </section>
 
