@@ -44,17 +44,17 @@ The game will feature 3D models and graphics, but all the action takes place in 
  * **P2** -- [**Design Specification** - **Interim Report**][5]
  * **P3** -- [**Progress Report** - **Minimum Target**][6]
  * **P4** -- [**Alpha Release**][7]
- * **P5** -- [**Play Testing**][9] - Final Paper
+ * **P5** -- [**Play Testing**][9] - [Final Paper][10]
 
 ## Demo Executables
 
-Visit our [**Downloads Page**][7] in order to get our latest demo build for your desired platform.
+Visit our [**Downloads Page**][7] in order to get our latest demo build for your desired platform. Or if you'd rather play in-browser, check out [**Solobot as a web app**][11]!
 
 ## Documentation
 * [**Build Instructions - Git Guide & Workflow**][4]
 * [**Guide To Using the Normal Map Texture Tool**][8]
 
-[1]: Docs/Free%20Beer%20Project%20COMP%204970.odt
+[1]: Docs/p1.pdf
 [2]: Docs/design_sketch_1.jpg
 [3]: Docs/design_sketch_2.jpg
 [4]: Docs/gitbuilding.md
@@ -63,3 +63,5 @@ Visit our [**Downloads Page**][7] in order to get our latest demo build for your
 [7]: Docs/download.md
 [8]: Docs/normal_mapping/nvidia_normal_mapping.md
 [9]: Docs/playtesting.md
+[10]: Docs/p4.pdf
+[11]: http://freebeergames.github.io/Solobot/webplayer/webplayer.html
