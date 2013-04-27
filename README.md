@@ -1,10 +1,11 @@
 ## Free Beer Group Members
-* Cory Gross
-* William Wallace
-* Jack Satriano
-* Carter Michaels
-* Joshua Kane
-* Dillon Daugherty
+
+ * Cory Gross
+ * William Wallace
+ * Jack Satriano
+ * Carter Michaels
+ * Joshua Kane
+ * Dillon Daugherty
 
 ## What is Solobot?
 
@@ -27,23 +28,23 @@ The game will feature 3D models and graphics, but all the action takes place in 
 
 ## Development Tools
 
-* **Platform:** Unity
-* **Audio:** Audacity
-* **Graphics:** Autodesk 3DS Max, Blender
+ * **Platform:** Unity
+ * **Audio:** Audacity
+ * **Graphics:** Autodesk 3DS Max, Blender
 
 ## Development Levels
 
-* **Alpha:** March 20th
-* **Beta:** April 10th
-* **Final:** April 20th
+ * **Alpha:** March 20th
+ * **Beta:** April 10th
+ * **Final:** April 20th
 
 ## Deliverables
 
-* **P1** -- [**Game Proposal**][1] - [**Design Sketch 1**][2] - [**Design Sketch 2**][3]
-* **P2** -- [**Design Specification** - **Interim Report**][5]
-* **P3** -- [**Progress Report** - **Minimum Target**][6]
-* **P4** -- [**Alpha Release**][7]
-* **P5** -- Play Testing; Final Paper
+ * **P1** -- [**Game Proposal**][1] - [**Design Sketch 1**][2] - [**Design Sketch 2**][3]
+ * **P2** -- [**Design Specification** - **Interim Report**][5]
+ * **P3** -- [**Progress Report** - **Minimum Target**][6]
+ * **P4** -- [**Alpha Release**][7]
+ * **P5** -- [**Play Testing**][9] - Final Paper
 
 ## Demo Executables
 
@@ -51,6 +52,7 @@ Visit our [**Downloads Page**][7] in order to get our latest demo build for your
 
 ## Documentation
 * [**Build Instructions - Git Guide & Workflow**][4]
+* [**Guide To Using the Normal Map Texture Tool**][8]
 
 [1]: Docs/Free%20Beer%20Project%20COMP%204970.odt
 [2]: Docs/design_sketch_1.jpg
@@ -59,3 +61,5 @@ Visit our [**Downloads Page**][7] in order to get our latest demo build for your
 [5]: Docs/interim.md
 [6]: Docs/mintarget.md
 [7]: Docs/download.md
+[8]: Docs/normal_mapping/nvidia_normal_mapping.md
+[9]: Docs/playtesting.md
