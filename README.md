@@ -54,6 +54,14 @@ Visit our [**Downloads Page**][7] in order to get our latest demo build for your
 * [**Build Instructions - Git Guide & Workflow**][4]
 * [**Guide To Using the Normal Map Texture Tool**][8]
 
+## Controls For The Game
+
+ * **Left Mouse or CTRL** - Punch
+ * **Right Mouse or ALT** - Fire Projectile
+ * **WASD or Arrow Keys** - Navigation.
+ * **E or Z Key** - Power-up activation.
+ * **Shift Key** - Run
+
 [1]: Docs/p1.pdf
 [2]: Docs/design_sketch_1.jpg
 [3]: Docs/design_sketch_2.jpg
