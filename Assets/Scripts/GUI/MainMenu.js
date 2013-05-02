@@ -8,27 +8,27 @@ private var selectionTime : float = 0.0;
 private var isWebPlayer : boolean = false;
 private var isEditor : boolean = false;
 
-private var exitButtonEnabled : boolean = false;
-
 private var menuItems : String[];
 
 public var text : StarWarsText;
 
+private var contextualButton : String = null;
+
 function Start() {
+
 	DeterminePlatform();
-	exitButtonEnabled = !(isWebPlayer || isEditor);
+	if (isWebPlayer)
+		contextualButton = 'Fullscreen';
+	else if (!(isWebPlayer || isEditor))
+		contextualButton = 'Exit';
 	
 	var numMenuItems = 2;
-	if (exitButtonEnabled)
-		numMenuItems = 3;
+	if (contextualButton != null) numMenuItems = 3;
 	
 	menuItems = new String[numMenuItems];
-	
 	menuItems[0] = 'Start';
 	menuItems[1] = 'About';
-	
-	if (exitButtonEnabled)
-		menuItems[2] = 'Exit';
+	menuItems[2] = contextualButton;
 }
 
 function DeterminePlatform() {
@@ -80,32 +80,38 @@ function OnGUI () {
 		OnAboutButtonPressed();
 	}
 	
+	
 	/** Exit Button, quits the application, not available in Web-Player */
-	if (exitButtonEnabled) {
-		GUI.SetNextControlName('Exit');
+	GUI.SetNextControlName(contextualButton);
+	if (contextualButton == 'Exit') {
 		if (GUI.Button(Rect(Screen.width / 2 - 50, 301, 100, 40), 'Exit')) {
 			OnExitButtonPressed();
 		}
-	} else {
-		GUI.SetNextControlName('Fullscreen');
+	} else if (contextualButton == 'Fullscreen') {
 		if (GUI.Button(Rect(Screen.width / 2 - 50, 301, 100, 40), 'Fullscreen')) {
-			ToggleFullscreen();
+			OnFullscreenButtonPressed();
 		}
 	}
 	
 	GUI.FocusControl(menuItems[selectionInput]);
 	if (Input.GetButtonDown('Jump')) {
 		var focused = GUI.GetNameOfFocusedControl();
-		if(focused == 'Start')
+		if(focused == 'Start') {
 			OnStartButtonPressed();
-		else if (focused == 'About')
+		}
+		else if (focused == 'About') {
 			OnAboutButtonPressed();
-		else if (focused == 'Exit')
+		}
+		else if (focused == 'Exit') {
 			OnExitButtonPressed();
+		}
+		else if (focused == 'Fullscreen') {
+			OnFullscreenButtonPressed();
+		}
 	}
 }
 
-function ToggleFullscreen() {
+function OnFullscreenButtonPressed() {
 	Screen.fullScreen = !Screen.fullScreen;
 }
 
